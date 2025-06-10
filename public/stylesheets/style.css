@@ -1,8 +1,16 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+@import "tailwindcss";
 
-a {
-  color: #00B7FF;
-}
+
+body { background: #f7f7f7; color: #222; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; }
+
+h1 { color: #4fc3f7 !important; font-size: 2em; margin-bottom: 0.5em; }
+table { width: 100%; border-collapse: collapse; margin-top: 1.5em; }
+th, td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
+th { background: #f0f8ff; }
+.btn { background: #4fc3f7; color: #fff; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; text-decoration: none; }
+.btn:hover { background: #039be5; }
+.nav { margin-bottom: 2em; }
+.nav a { margin-right: 1em; color: #4fc3f7; text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.blue-title{color: #4fc3f7}
+.text-blue-600{color:#4fc3f7}

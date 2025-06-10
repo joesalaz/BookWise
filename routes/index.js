@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', {layout:'landing', title:'BookWise' });// Still using index but showing a different layout
 });
 
 module.exports = router;

@@ -2,9 +2,48 @@
 <html>
   <head>
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/output.css"/>
+    {{!-- <link rel='stylesheet' href='/stylesheets/style.css' /> --}}
   </head>
   <body>
-    {{{body}}}
+    <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="bg-white w-64 hidden md:block shadow-lg">
+      <div class="p-6 border-b">
+        <span class="text-2xl font-bold text-blue-600">BookWise</span>
+        <div class="text-xs text-gray-500 mt-1">Your personal book collection</div>
+      </div>
+      <nav class="mt-6">
+        <a href="/" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-50 text-gray-700">Home</a>
+        <a href="/dashboard" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-50 text-gray-700">Dashboard</a>
+        <a href="/books" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-50 text-gray-700">Books</a>
+        <a href="/logout" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-50 text-gray-700">Logout</a>
+      </nav>
+    </aside>
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col">
+      <!-- Header -->
+      <header class="bg-white shadow px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center">
+          <!-- Sidebar toggle for mobile -->
+          <button id="sidebarToggle" class="md:hidden mr-4 text-gray-600 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <span id="hide" class="text-2xl font-bold text-blue-600">BookWise</span>
+        </div>
+        <div>
+          <!-- User menu or actions here -->
+        </div>
+      </header>
+      <!-- Page Content -->
+      <main class="flex-1 overflow-y-auto p-8">
+        {{{body}}}
+      </main>
+    </div>
+  </div>
+  <script src="/javascripts/main.js"></script>
   </body>
 </html>
