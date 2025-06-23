@@ -147,7 +147,7 @@ bookwise/
 
 ## Documentation
 
-See the full documentation: [documentation.html](./documentation.html)
+See the full documentation: [documentation.html](https://joesalaz.github.io/BookWise/documentation.html./documentation.html)
 
 ---
 
