@@ -145,6 +145,12 @@ bookwise/
 
 ---
 
+## Documentation
+
+See the full documentation: [documentation.html](./documentation.html)
+
+---
+
 ## License
 
 This project is open source under the MIT License.
