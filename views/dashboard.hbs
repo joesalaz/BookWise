@@ -1,36 +1,115 @@
-<h1>{{title}}</h1>
-<p>Book collection</p>
-<div class="bg-white rounded-lg shadow w-full flex-1 p-8">
-<div class="nav mb-6">
-  <a href="#">Add Book</a>
-</div>
-<table class="w-full border-collapse mt-6">
-  <thead class="bg-blue-600 px-4 py-2">
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Year</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>The Pragmatic Programmer</td>
-      <td>Andrew Hunt</td>
-      <td>1999</td>
-      <td><a href="#" class="btn">View</a></td>
-    </tr>
-    <tr>
-      <td>Clean Code</td>
-      <td>Robert C. Martin</td>
-      <td>2008</td>
-      <td><a href="#" class="btn">View</a></td>
-    </tr>
-    <tr>
-      <td>JavaScript: The Good Parts</td>
-      <td>Douglas Crockford</td>
-      <td>2008</td>
-      <td><a href="#" class="btn">View</a></td>
-    </tr>
-  </tbody>
-</table>
+
+    <!-- Header -->
+   <header class="bg-gradient-to-br from-blue-100 to-blue-300 mx-auto w-full py-6 shadow text-blue-900">
+  <div class="container mx-auto flex justify-between items-center px-4">
+    <h1 class="text-2xl font-bold text-titleColor font-monserrat">{{title}}</h1>
+    <!-- Hamburger Button (Mobile) -->
+    <button id="menuBtn" class="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-700" aria-label="Open Menu">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <!-- Desktop Menu -->
+    <nav id="mainNav" class="font-raleway hidden md:flex space-x-4">
+      <a href="/" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Home</a>
+      <a href="/library" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Library</a>
+      <a href="/profile" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Profile</a>
+      <a href="/logout" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Logout</a>
+    </nav>
+  </div>
+  <!-- Mobile Menu (Dropdown) -->
+  <div id="mobileNav" class="md:hidden hidden px-4 pb-4">
+    <nav class="flex flex-col items-center space-y-2">
+      <a href="/" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Home</a>
+      <a href="/library" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Library</a>
+      <a href="/profile" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Profile</a>
+      <a href="/logout" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Logout</a>
+    </nav>
+  </div>
+</header>
+    <!-- Main Content -->
+    <main class="flex-1 w-full mx-auto px-4 py-8 md:py-32 lg:py-52 ">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Library Summary Card -->
+            <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+                <svg class="w-10 h-10 text-blue-700 mb-4" fill="none" stroke="currentColor" stroke-width="1.5"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 6.75A2.25 2.25 0 014.5 4.5h15a2.25 2.25 0 012.25 2.25v13.5A2.25 2.25 0 0119.5 22.5h-15A2.25 2.25 0 012.25 20.25V6.75z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 8.25h12M6 12h12M6 15.75h12" />
+                </svg>
+                <h2 class="text-lg font-semibold mb-2">My Library</h2>
+                <p class="text-blue-900 mb-4">You have <span class="font-bold text-blue-700">42</span> books in your
+                    collection.</p>
+                <a href="/library" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">View
+                    Library</a>
+            </div>
+
+            <!-- Recent Activity Card -->
+            <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+                <svg class="w-10 h-10 text-blue-700 mb-4" fill="none" stroke="currentColor" stroke-width="1.5"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
+                    <circle cx="12" cy="12" r="10" />
+                </svg>
+                <h2 class="text-lg font-semibold mb-2">Recent Activity</h2>
+                <ul class="text-blue-900 text-sm space-y-2 mb-4">
+                    <li>Added <span class="font-semibold">"Atomic Habits"</span></li>
+                    <li>Finished <span class="font-semibold">"Deep Work"</span></li>
+                    <li>Updated <span class="font-semibold">"Clean Code"</span></li>
+                </ul>
+                <a href="/activity" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">View
+                    Activity</a>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+                <svg class="w-10 h-10 text-blue-700 mb-4" fill="none" stroke="currentColor" stroke-width="1.5"
+                    viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="4" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 20c0-4 4-7 8-7s8 3 8 7" />
+                </svg>
+                <h2 class="text-lg font-semibold mb-2">Profile</h2>
+                <p class="text-blue-900 mb-4">Welcome, <span class="font-bold text-blue-700">Alex</span>!</p>
+                <a href="/profile" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">Edit
+                    Profile</a>
+            </div>
+
+            <!-- Add a New Book Card -->
+            <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+                <svg class="w-10 h-10 text-blue-700 mb-4" fill="none" stroke="currentColor" stroke-width="1.5"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                <h2 class="text-lg font-semibold mb-2">Add a New Book</h2>
+                <form class="w-full flex flex-col items-center">
+                    <input type="text" placeholder="Title"
+                        class="w-full mb-3 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-700" />
+                    <input type="text" placeholder="Author"
+                        class="w-full mb-3 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-700" />
+                    <input type="text" placeholder="eBook URL"
+                        class="w-full mb-3 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-700" />
+                    <input type="file" accept=".pdf,.epub" class="w-full mb-3" />
+                    <button type="submit"
+                        class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition w-full">Add
+                        Book</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-blue-100 text-center py-8 mx-auto mt-auto">
+        <div class="max-w-6xl mx-auto items-center px-4 w-full">
+            Open source under the <a href="https://github.com/your-repo/LICENSE"
+                class="underline hover:text-blue-300">MIT License</a>.
+            <a href="https://github.com/joesalaz/BookWise" class="mx-2 underline hover:text-blue-300">GitHub</a>
+        </div>
+    </footer>
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+        });
+    </script>
