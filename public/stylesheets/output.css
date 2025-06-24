@@ -934,8 +934,12 @@ video {
   font-family: Inter, sans-serif;
 }
 
-.font-monserrat {
-  font-family: Monserrat, sans-serif;
+.font-montserrat {
+  font-family: Montserrat, sans-serif;
+}
+
+.font-nunito {
+  font-family: Nunito, sans-serif;
 }
 
 .font-raleway {
@@ -965,6 +969,11 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .font-bold {
@@ -1151,6 +1160,11 @@ video {
   .md\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 }
 
