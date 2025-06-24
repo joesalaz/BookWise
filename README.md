@@ -97,6 +97,32 @@ Features like category management, in-app reading, book cover uploads, and user 
 
 ---
 
+## Environment Variables & Session Secret
+
+This project uses environment variables for sensitive configuration.  
+**A `.env.example` file is provided as a template.**
+
+1. **Copy `.env.example` to `.env` in your project root:**
+   - On Mac/Linux: `cp .env.example .env`
+   - On Windows: Copy manually or use `copy .env.example .env` in Command Prompt.
+
+2. **Edit your `.env` file and set a strong, random value for `SESSION_SECRET`:**
+   ```
+   SESSION_SECRET=your_super_secret_key
+   ```
+
+3. **Never commit your `.env` file to version control.**  
+   Make sure `.env` is listed in your `.gitignore`.
+
+**For deployment (e.g., Render):**  
+Set `SESSION_SECRET` in your deployment platform’s environment variables dashboard.  
+You do not need a `.env` file on the server.
+
+---
+
+**Tailwind CSS Note:**  
+Tailwind CSS should be built locally before deployment. The generated `output.css` file is committed and used directly in production. There is no need to run Tailwind on Render or in production.
+
 ## Project Structure
 
 ```
@@ -147,7 +173,7 @@ bookwise/
 
 ## Documentation
 
-See the full documentation: [documentation.html](https://joesalaz.github.io/BookWise/documentation.html)
+See the full documentation: [documentation.html](https://joesalaz.github.io/BookWise/index.html)
 
 ---
 

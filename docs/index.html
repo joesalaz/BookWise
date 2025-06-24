@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>BookWise Documentation</title>
@@ -7,20 +8,23 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.4.1/tailwind.min.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-blue-50 text-gray-800 font-sans">
-  <div class="max-w-4xl mx-auto px-4 py-10">
+  <div class="max-w-4xl mx-auto px-8 py-10 bg-white rounded shadow mt-10 mb-10">
     <h1 class="text-4xl font-bold text-blue-700 mb-4">BookWise Documentation</h1>
     <p class="mb-8 text-lg">
-        BookWise is a modern personal library management app that lets users organize, review, and explore their book
-        collection with ease. It features category management, in-app reading for digital books (EPUB, PDF, and more), book
-        cover uploads, and secure user authentication. Built with Node.js, Express, Handlebars, Sequelize, SQLite, and
-        Tailwind CSS v3.  </p>
+      BookWise is a modern personal library management app that lets users organize, review, and explore their book
+      collection with ease. It features category management, in-app reading for digital books (EPUB, PDF, and more),
+      book
+      cover uploads, and secure user authentication. Built with Node.js, Express, Handlebars, Sequelize, SQLite, and
+      Tailwind CSS v3. </p>
 
     <nav class="mb-10">
       <ul class="list-disc list-inside space-y-1">
-        <li><a href="#features" class="text-blue-700 hover:underline">Features</a></li>      
+        <li><a href="#features" class="text-blue-700 hover:underline">Features</a></li>
         <li><a href="#project-board" class="text-blue-700 hover:underline">Project Board and Issue Tracker</a></li>
         <li><a href="#getting-started" class="text-blue-700 hover:underline">Getting Started</a></li>
+        <li><a href="#local-env-setup" class="text-blue-700 hover:underline">Local Environment Setup</a></li>
         <li><a href="#project-structure" class="text-blue-700 hover:underline">Project Structure</a></li>
         <li><a href="#project-structure-update" class="text-blue-700 hover:underline">Project Structure Update: Layouts and Modals</a></li>
         <li><a href="#usage-guide" class="text-blue-700 hover:underline">Usage Guide</a></li>
@@ -42,17 +46,21 @@
       <li>Responsive dashboard and profile pages</li>
       <li>Search and filter books by title, author, or category</li>
     </ul>
-        <h2 id="project-board" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Project Board and Issue Tracker</h2>
+    <h2 id="project-board" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Project Board and Issue Tracker</h2>
     <ul class="list-disc list-inside mb-6">
       <li><b>To Do (Most Important for Demo State):</b>
         <ul class="ml-6 list-[circle]">
-          <li><b>User Authentication (Signup &amp; Login):</b> Signup and login pages/modals, password hashing, session or JWT management.</li>
-          <li><b>Book CRUD (Add, Edit, Delete Books):</b> Forms/modals for adding and editing books, delete functionality.</li>
+          <li><b>User Authentication (Signup &amp; Login):</b> Signup and login pages/modals, password hashing, session
+            or JWT management.</li>
+          <li><b>Book CRUD (Add, Edit, Delete Books):</b> Forms/modals for adding and editing books, delete
+            functionality.</li>
           <li><b>Category Management:</b> Add, edit, and delete categories; assign books to categories.</li>
-          <li><b>Book List &amp; Dashboard:</b> Display user’s books in a card-based dashboard; filter and search by title, author, or category.</li>
+          <li><b>Book List &amp; Dashboard:</b> Display user’s books in a card-based dashboard; filter and search by
+            title, author, or category.</li>
           <li><b>Book Cover Upload:</b> Upload or link to book cover images.</li>
           <li><b>User Profile Page:</b> View and edit user details and preferences.</li>
-          <li><b>Basic In-App Reading:</b> Integrate EPUB.js and PDF.js for reading EPUB and PDF files in-app; render plain text/HTML books in a reading view.</li>
+          <li><b>Basic In-App Reading:</b> Integrate EPUB.js and PDF.js for reading EPUB and PDF files in-app; render
+            plain text/HTML books in a reading view.</li>
         </ul>
       </li>
       <li class="mt-2"><b>Backlog (Less Critical for Initial Demo):</b>
@@ -67,7 +75,8 @@
         </ul>
       </li>
     </ul>
-    <p class="italic text-lg"><span class="text-xl font-bold">NOTE:</span> TO DO and Backlog will be updated as project progresses.</p>
+    <p class="italic text-lg"><span class="text-xl font-bold">NOTE:</span> TO DO and Backlog will be updated as project
+      progresses.</p>
     <h2 id="getting-started" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Getting Started</h2>
     <ol class="list-decimal list-inside mb-6 space-y-2">
       <li>
@@ -94,17 +103,47 @@ cd bookwise</code></pre>
       </li>
       <li>
         <b>Build Tailwind CSS v3:</b>
-        <pre class="bg-gray-100 rounded p-2 mt-1"><code>npx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/output.css --watch</code></pre>
+        <pre
+          class="bg-gray-100 rounded p-2 mt-1"><code>npx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/output.css --watch</code></pre>
       </li>
       <li>
         <b>Run the app:</b>
         <pre class="bg-gray-100 rounded p-2 mt-1"><code>npm start</code></pre>
-        Visit <a href="http://localhost:3000" class="text-blue-700 hover:underline">http://localhost:3000</a> in your browser.
+        Visit <a href="http://localhost:3000" class="text-blue-700 hover:underline">http://localhost:3000</a> in your
+        browser.
       </li>
     </ol>
+    <h2 id="local-env-setup" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Local Environment Setup: Session
+      Secret</h2>
+    <div class="mb-6">
+      <ol class="list-decimal list-inside space-y-2">
+        <li>
+          <b>Copy <code>.env.example</code> to <code>.env</code> in your project root:</b>
+          <pre class="bg-gray-100 rounded p-2 mt-1"><code>cp .env.example .env</code></pre>
+          <span class="italic text-sm">On Windows, copy manually or use <code>copy .env.example .env</code> in Command
+            Prompt.</span>
+        </li>
+        <li>
+          <b>Edit <code>.env</code> and replace <code>your_super_secret_key</code> with a long, random string.</b>
+        </li>
+        <li>
+          <b>Do not commit your <code>.env</code> file to GitHub.</b>
+          <br>
+          Make sure <code>.env</code> is listed in your <code>.gitignore</code>.
+        </li>
+      </ol>
+      <div class="mt-4">
+        <b>Note:</b>
+        <ul class="list-disc list-inside ml-6">
+          <li><code>.env.example</code> is provided as a template for your environment variables.</li>
+          <li>For deployment (e.g., Render), set <code>SESSION_SECRET</code> in the dashboard’s environment variables
+            section.</li>
+        </ul>
+      </div>
+    </div>
 
-            <h2 id="project-structure" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Project Structure</h2>
-        <pre class="bg-gray-100 rounded p-4 mb-6 text-sm overflow-x-auto"><code>
+    <h2 id="project-structure" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Project Structure</h2>
+    <pre class="bg-gray-100 rounded p-4 mb-6 text-sm overflow-x-auto"><code>
     bookwise/
     |-- classes/               # Custom JS classes for OOP code
     |-- config/                # Database configuration
@@ -130,13 +169,17 @@ cd bookwise</code></pre>
     |-- README.md              # Main documentation  
     |-- tailwind.config.js    # Tailwind CSS configuration
         </code></pre>
-<!-- Add this to your documentation.html, e.g., after the "Project Structure" section -->
+    <!-- Add this to your documentation.html, e.g., after the "Project Structure" section -->
 
-<h2 id="project-structure-update" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Project Structure Update: Layouts and Modals</h2>
-<p class="mb-4">
-  <b>Summary:</b> The project structure was updated for clarity and maintainability. The <code>views/layouts/</code> folder now contains the main layout file (<code>layout.hbs</code>) and layout partials (<code>header.hbs</code>, <code>footer.hbs</code>). A <code>modals/</code> folder was also created inside <code>views/partials/</code> to organize all modal partials.
-</p>
-<pre class="bg-gray-100 rounded p-4 mb-6 text-sm overflow-x-auto"><code>
+    <h2 id="project-structure-update" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Project Structure Update:
+      Layouts and Modals</h2>
+    <p class="mb-4">
+      <b>Summary:</b> The project structure was updated for clarity and maintainability. The <code>views/layouts/</code>
+      folder now contains the main layout file (<code>layout.hbs</code>) and layout partials (<code>header.hbs</code>,
+      <code>footer.hbs</code>). A <code>modals/</code> folder was also created inside <code>views/partials/</code> to
+      organize all modal partials.
+    </p>
+    <pre class="bg-gray-100 rounded p-4 mb-6 text-sm overflow-x-auto"><code>
 bookwise/
 |-- views/
 |   |-- layouts/           # Layouts and layout partials
@@ -150,10 +193,10 @@ bookwise/
 |   |-- landing.hbs        # Landing page main view
 |   |-- ...                # Other main views
 </code></pre>
-<p class="mb-4">
-  <b>How to register and use layouts and partials in <code>app.js</code>:</b>
-</p>
-<pre class="bg-gray-100 rounded p-4 mb-6 text-sm overflow-x-auto"><code>
+    <p class="mb-4">
+      <b>How to register and use layouts and partials in <code>app.js</code>:</b>
+    </p>
+    <pre class="bg-gray-100 rounded p-4 mb-6 text-sm overflow-x-auto"><code>
 const hbs = require('hbs');
 const path = require('path');
 
@@ -167,26 +210,37 @@ app.set('view engine', 'hbs');
 // Set the default layout to use views/layouts/layout.hbs
 app.set('view options', { layout: 'layouts/layout' });
 </code></pre>
-<p class="mb-6">
-  <b>Usage:</b> Your main layout file should be at <code>views/layouts/layout.hbs</code> and contain <code>{{{body}}}</code> where page content will be injected. In your views, you can include layout partials with <code>{{&gt; header}}</code> and <code>{{&gt; footer}}</code>, and modal partials with <code>{{&gt; modals/aboutModal}}</code>.
-</p>
+    <p class="mb-6">
+      <b>Usage:</b> Your main layout file should be at <code>views/layouts/layout.hbs</code> and contain
+      <code>{{{body}}}</code> where page content will be injected. In your views, you can include layout partials with
+      <code>{{&gt; header}}</code> and <code>{{&gt; footer}}</code>, and modal partials with
+      <code>{{&gt; modals/aboutModal}}</code>.
+    </p>
 
 
     <h2 id="usage-guide" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Usage Guide</h2>
     <ul class="list-disc list-inside mb-6">
-      <li><b>User Authentication:</b> Sign up and log in to access your personal library. Passwords are securely hashed.</li>
-      <li><b>Managing Books:</b> Add, edit, or delete books. Assign books to categories and upload cover images or provide image URLs.</li>
+      <li><b>User Authentication:</b> Sign up and log in to access your personal library. Passwords are securely hashed.
+      </li>
+      <li><b>Managing Books:</b> Add, edit, or delete books. Assign books to categories and upload cover images or
+        provide image URLs.</li>
       <li><b>Categories:</b> Create, edit, and delete categories. Filter your library by category.</li>
-      <li><b>In-App Reading:</b> Open EPUB, PDF, or plain text books directly in the app. (Uses <a href="https://github.com/futurepress/epub.js" class="text-blue-700 hover:underline" target="_blank">epub.js</a> and <a href="https://mozilla.github.io/pdf.js/" class="text-blue-700 hover:underline" target="_blank">PDF.js</a>.)</li>
+      <li><b>In-App Reading:</b> Open EPUB, PDF, or plain text books directly in the app. (Uses <a
+          href="https://github.com/futurepress/epub.js" class="text-blue-700 hover:underline"
+          target="_blank">epub.js</a> and <a href="https://mozilla.github.io/pdf.js/"
+          class="text-blue-700 hover:underline" target="_blank">PDF.js</a>.)</li>
       <li><b>Sticky Notes:</b> (Planned) Add sticky notes or highlights to specific pages while reading.</li>
       <li><b>Search &amp; Filter:</b> Use the search bar to find books by title, author, or category.</li>
-      <li><b>Profile &amp; Dashboard:</b> View and edit your profile, see library stats, and manage your collection from a responsive dashboard.</li>
+      <li><b>Profile &amp; Dashboard:</b> View and edit your profile, see library stats, and manage your collection from
+        a responsive dashboard.</li>
     </ul>
 
     <h2 id="development-workflow" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Development Workflow</h2>
     <ul class="list-disc list-inside mb-6">
-      <li>Track features, bugs, and enhancements using the <a href="../../issues" class="text-blue-700 hover:underline">Issue Tracker</a>.</li>
-      <li>Organize and prioritize work on the <a href="../../projects" class="text-blue-700 hover:underline">Project Board</a>.</li>
+      <li>Track features, bugs, and enhancements using the <a href="../../issues"
+          class="text-blue-700 hover:underline">Issue Tracker</a>.</li>
+      <li>Organize and prioritize work on the <a href="../../projects" class="text-blue-700 hover:underline">Project
+          Board</a>.</li>
       <li>Apply labels (e.g., <code>feature</code>, <code>bug</code>, <code>v1.0</code>) for clarity.</li>
       <li>Use feature branches for new features or bug fixes.</li>
       <li>Write clear, concise code comments and keep documentation up to date.</li>
@@ -220,28 +274,38 @@ app.set('view options', { layout: 'layouts/layout' });
 
     <h2 id="troubleshooting" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Troubleshooting</h2>
     <ul class="list-disc list-inside mb-6">
-      <li><b>Tailwind CSS not building?</b> Ensure you’re using Node.js v16.13.0 or higher and have installed all dependencies. See <a href="https://tailwindcss.com/docs/installation" class="text-blue-700 hover:underline" target="_blank">Tailwind CSS docs</a>.</li>
+      <li><b>Tailwind CSS not building?</b> Ensure you’re using Node.js v16.13.0 or higher and have installed all
+        dependencies. See <a href="https://tailwindcss.com/docs/installation" class="text-blue-700 hover:underline"
+          target="_blank">Tailwind CSS docs</a>.</li>
       <li><b>Database errors?</b> Check your <code>config/config.json</code> and ensure migrations have been run.</li>
       <li><b>Authentication issues?</b> Ensure session or JWT configuration is correct and passwords are hashed.</li>
-      <li><b>Need more help?</b> Open an issue on the <a href="../../issues" class="text-blue-700 hover:underline">Issue Tracker</a>.</li>
+      <li><b>Need more help?</b> Open an issue on the <a href="../../issues" class="text-blue-700 hover:underline">Issue
+          Tracker</a>.</li>
     </ul>
 
     <h2 id="resources" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">Resources</h2>
     <ul class="list-disc list-inside mb-6">
       <li><a href="../../issues" class="text-blue-700 hover:underline">Issue Tracker</a></li>
       <li><a href="../../projects" class="text-blue-700 hover:underline">Project Board</a></li>
-      <li><a href="https://tailwindcss.com/docs/" class="text-blue-700 hover:underline" target="_blank">Tailwind CSS Documentation</a></li>
-      <li><a href="https://sequelize.org/master/" class="text-blue-700 hover:underline" target="_blank">Sequelize Documentation</a></li>
-      <li><a href="https://expressjs.com/" class="text-blue-700 hover:underline" target="_blank">Express Documentation</a></li>
-      <li><a href="https://github.com/futurepress/epub.js" class="text-blue-700 hover:underline" target="_blank">epub.js</a> &amp; <a href="https://mozilla.github.io/pdf.js/" class="text-blue-700 hover:underline" target="_blank">PDF.js</a></li>
+      <li><a href="https://tailwindcss.com/docs/" class="text-blue-700 hover:underline" target="_blank">Tailwind CSS
+          Documentation</a></li>
+      <li><a href="https://sequelize.org/master/" class="text-blue-700 hover:underline" target="_blank">Sequelize
+          Documentation</a></li>
+      <li><a href="https://expressjs.com/" class="text-blue-700 hover:underline" target="_blank">Express
+          Documentation</a></li>
+      <li><a href="https://github.com/futurepress/epub.js" class="text-blue-700 hover:underline"
+          target="_blank">epub.js</a> &amp; <a href="https://mozilla.github.io/pdf.js/"
+          class="text-blue-700 hover:underline" target="_blank">PDF.js</a></li>
     </ul>
 
     <h2 id="license" class="text-2xl font-semibold text-blue-800 mt-10 mb-4">License</h2>
-    <p class="mb-10">This project is open source under the <a href="../LICENSE" class="text-blue-700 hover:underline">MIT License</a>.</p>
+    <p class="mb-10">This project is open source under the <a href="../LICENSE"
+        class="text-blue-700 hover:underline">MIT License</a>.</p>
 
     <footer class="text-center text-gray-400 text-sm mt-10">
       BookWise &copy; 2025. Built with Node.js, Express, Handlebars, Sequelize, SQLite, and Tailwind CSS v3.
     </footer>
   </div>
 </body>
+
 </html>
