@@ -173,7 +173,7 @@ bookwise/
 
 ## Documentation
 
-See the full documentation: [documentation.html](https://joesalaz.github.io/BookWise/index.html)
+See the full documentation: - <a href="https://joesalaz.github.io/BookWise/index.html" target="_blank">BookWise Full Documentation (HTML)</a>
 
 ---
 
@@ -185,7 +185,8 @@ This project is open source under the MIT License.
 
 ## Resources
 
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs/)
-- [Sequelize Documentation](https://sequelize.org/master/)
-- [Express Documentation](https://expressjs.com/)
+- <a href="https://tailwindcss.com/docs/" target="_blank">Tailwind CSS Documentation</a>
+- <a href="https://sequelize.org/master/" target="_blank">Sequelize Documentation</a>
+- <a href="https://expressjs.com/" target="_blank">Express Documentation</a>
+
 ```
