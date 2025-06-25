@@ -96,20 +96,9 @@
                 </form>
             </div>
         </div>
+       
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-blue-900 text-blue-100 text-center py-12 mx-auto mt-auto">
-        <div class="max-w-6xl mx-auto items-center px-4 w-full">
-            Open source under the <a href="https://github.com/your-repo/LICENSE"
-                class="underline hover:text-blue-300">MIT License</a>.
-            <a href="https://github.com/joesalaz/BookWise" class="mx-2 underline hover:text-blue-300">GitHub</a>
-        </div>
-    </footer>
-    <script>
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileNav = document.getElementById('mobileNav');
-        menuBtn.addEventListener('click', () => {
-            mobileNav.classList.toggle('hidden');
-        });
-    </script>
+    {{!--  Footer for dashboard page --}} 
+    {{> structure/footer-dashboard}}
+   

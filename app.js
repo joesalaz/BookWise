@@ -11,8 +11,38 @@ var dashboardRouter = require("./routes/dashboard");
 var bookRouter = require("./routes/book");
 var booksRouter = require("./routes/books");
 const hbs = require("hbs");
-hbs.registerPartials(__dirname + "/views/partials");
-hbs.registerPartials(__dirname + "/views/layouts");
+const fs = require("fs");
+
+
+// This function will walk through the given directory (and all its subfolders)
+// and register every .hbs file it finds as a Handlebars partial.
+// The partial's name will match its path inside the partials folder, using slashes.
+function registerPartialsRecursively(dir, partialsRoot = dir) {
+  // Let's look at everything in the current directory
+  fs.readdirSync(dir).forEach(file => {
+    const fullPath = path.join(dir, file);
+
+    // If we find a folder, let's dive in and look for more partials there
+    if (fs.statSync(fullPath).isDirectory()) {
+      registerPartialsRecursively(fullPath, partialsRoot);
+    }
+    // If it's a .hbs file, it's a partial—let's register it!
+    else if (path.extname(fullPath) === ".hbs") {
+      // Figure out what to call this partial based on its path inside the partials folder
+      const partialName = path.relative(partialsRoot, fullPath)
+        .replace(/\\/g, "/") // Make sure it works on Windows too
+        .replace(/\.hbs$/, ""); // Drop the .hbs extension
+
+      // Now, actually register the partial with Handlebars
+      hbs.registerPartial(partialName, fs.readFileSync(fullPath, "utf8"));
+    }
+  });
+}
+// Just call this once, pointing to your partials folder.
+// Now I can use partials from any subfolder, like {{> structure/footer-dashboard}}
+registerPartialsRecursively(path.join(__dirname, "views/partials"));
+// hbs.registerPartials(__dirname + "/views/partials/structure");
+// hbs.registerPartials(__dirname + "/views/partials/modals");
 
 var app = express();
 
