@@ -4,9 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        titlleColor: "#1c398e",
-        iconColor: "#2563eb",
-        welcomeColor: "#1c398e !important",
+        "title-blue": "#1c398e",
+        "icon-blue": "#2563eb",
+        "welcome-blue": "#1c398e",
+        "feature-blue": "#1c398e",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
@@ -24,8 +25,18 @@ module.exports = {
         marhey: ["Marhey", "cursive"],
         baloo2: ["Baloo 2", "cursive"],
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            h2: {},
+          },
+        },
+      }),
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
+  
+  
+
 
