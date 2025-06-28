@@ -1,192 +1,76 @@
+```markdown
+
 # BookWise
 
-BookWise is a modern personal library management app that lets users organize, review, and explore their book collection with ease.  
-The current version features a card-based dashboard and a robust backend structure with seeded demo data for users, books, and categories.  
-Built with Node.js, Express, Handlebars, Sequelize, SQLite, and Tailwind CSS v3.  
-Features like category management, in-app reading, book cover uploads, and user authentication are planned.
+BookWise is a modern personal library management app that lets users organize, review, and explore their book collection with ease.
+
+**Tech Stack:** Node.js, Express, Handlebars, Sequelize, SQLite, Tailwind CSS v3
 
 ---
 
 ## Features
 
-- Card-based dashboard displaying demo books and categories (seeded data)
-- Modern project structure with scalable backend (Node.js, Express, Sequelize, Handlebars, Tailwind CSS)
+- Card-based dashboard for books and categories
 - Database models and associations for users, books, and categories
 - Seeders for demo users, books, and categories
+- Modern, scalable backend structure
+
+**Planned:**
+- Category management (add, edit, delete)
+- In-app reading (EPUB, PDF, plain text/HTML)
+- Book cover uploads
+- User authentication (signup, login, sessions)
+- User profile page and preferences
+- Sticky notes and highlights for digital books
+- Public profiles and book lists
+- Responsive design enhancements
+- Advanced search and filtering
 
 ---
 
-## Project Board and Issue Tracker
+## Quick Start
 
-### To Do (Most Important for Demo State)
-- [ ] **User Authentication (Signup & Login)**
-  - Implement signup and login pages/modals
-  - Hash password and manage user sessions or use JWT tokens
-- [ ] **Book CRUD (Add, Edit, Delete Books)**
-  - Create forms/modals for adding and editing books
-  - Implement delete functionality
-- [ ] **Category Management**
-  - Add, edit, and delete categories
-  - Assign books to categories
-- [ ] **Book List & Dashboard**
-  - Display user’s books in a card-based dashboard view
-  - Filter and search books by title, author, or category
-- [ ] **Book Cover Upload**
-  - Allow users to upload or link to book cover images
-- [ ] **User Profile Page**
-  - View and edit user details and preferences
-- [ ] **Basic In-App Reading**
-  - Integrate EPUB.js and PDF.js for reading EPUB and PDF files in-app
-  - Render plain text/HTML books in a reading view
-
-### Backlog (Less Critical for Initial Demo)
-- [ ] **Sticky Notes & Highlights**
-  - Add sticky notes or highlights to digital books while reading
-- [ ] **Public Profiles (Optional)**
-  - Allow users to view other users’ profiles and book lists
-- [ ] **Add Book Modal**
-  - Add new books via a modal form without leaving the dashboard
-- [ ] **Responsive Design Enhancements**
-  - Polish mobile and tablet layouts
-- [ ] **Advanced Search & Filtering**
-  - Add more granular search and filter options
-- [ ] **Dashboard Stats**
-  - Show stats (total books, categories, reading progress, etc.)
-- [ ] **Admin Features (Optional)**
-  - Admin dashboard for managing users and content
-
-> **NOTE:** TO DO and Backlog will be updated as project progresses.
-
----
-
-## Getting Started
-
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd <your-repo-folder>
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up your database**
-   - Configure your database in `config/config.json` (default is SQLite).
-   - Run migrations:
-     ```bash
-     npx sequelize-cli db:migrate
-     ```
-
-4. **(Optional) Seed the database with demo data**
-   ```bash
-   npx sequelize-cli db:seed:all
-   ```
-
-5. **Build Tailwind CSS v3**
-   ```bash
-   npx tailwindcss -i ./public/stylesheets/tailwind.css -o ./public/stylesheets/output.css --watch
-   ```
-
-6. **Run the app**
-   ```bash
-   npm start
-   ```
-   Visit [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
-## Environment Variables & Session Secret
-
-This project uses environment variables for sensitive configuration.  
-**A `.env.example` file is provided as a template.**
-
-1. **Copy `.env.example` to `.env` in your project root:**
-   - On Mac/Linux: `cp .env.example .env`
-   - On Windows: Copy manually or use `copy .env.example .env` in Command Prompt.
-
-2. **Edit your `.env` file and set a strong, random value for `SESSION_SECRET`:**
-   ```
-   SESSION_SECRET=your_super_secret_key
-   ```
-
-3. **Never commit your `.env` file to version control.**  
-   Make sure `.env` is listed in your `.gitignore`.
-
-**For deployment (e.g., Render):**  
-Set `SESSION_SECRET` in your deployment platform’s environment variables dashboard.  
-You do not need a `.env` file on the server.
-
----
-
-**Tailwind CSS Note:**  
-Tailwind CSS should be built locally before deployment. The generated `output.css` file is committed and used directly in production. There is no need to run Tailwind on Render or in production.
-
-## Project Structure
-
-```
-bookwise/
-|-- classes/               # Custom JS classes for OOP code
-|-- config/                # Database configuration
-|-- docs/                  # Project documentation
-|-- migrations/            # Sequelize migration files
-|-- models/                # Sequelize models (User, Book, Category, etc.)
-|-- public/
-|   |-- styles/            # Tailwind source and output CSS
-|   |-- uploads/           # Book cover images
-|   |-- javascripts/       # Client-side JavaScript files
-|   |-- images/            # Static images for the app
-|-- routes/                # Express route files
-|-- seeders/               # Sequelize seed files
-|-- views/
-|   |-- layouts/           # Layout partials (e.g., header.hbs, footer.hbs)
-|   |-- partials/
-|   |   |-- modals/        # Modal partials (e.g., authModal.hbs, aboutModal.hbs)
-|   |   |-- ...            # Other partials (navbar.hbs, etc.)
-|   |-- dashboard.hbs      # Dashboard main view
-|   |-- landing.hbs        # Landing page main view
-|   |-- ...                # Other main views
-|-- package.json
-|-- README.md              # Main documentation  
-|-- tailwind.config.js     # Tailwind CSS configuration
+```bash
+git clone https://github.com/joesalaz/bookwise.git
+cd bookwise
+npm install
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all   # optional
+npx tailwindcss -i ./public/stylesheets/tailwind.css -o ./public/stylesheets/output.css --watch
+npm start
 ```
 
----
-
-## Development Standards
-
-- All layout partials are in `views/layouts/`.
-- Modal partials are in `views/partials/modals/`.
-- Data is currently seeded; user input forms are planned.
-- Do **not** commit SQLite database files; use migrations and seeders for structure and sample data.
+Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## Contribution
+## 📚 Full Documentation
 
-- Use feature branches for new features or bug fixes.
-- Write clear commit messages and keep code well-commented.
-- Track features and bugs using GitHub Issues and the Project Board.
+See the [BookWise Wiki](https://github.com/joesalaz/bookwise/wiki) for:
+
+- Setup & Installation
+- Environment Variables
+- Project Structure
+- Usage Guide
+- Troubleshooting
+- Contribution Guide
+- Roadmap
+- And more!
 
 ---
 
-## Documentation
+## Links
 
-See the full documentation: - <a href="https://joesalaz.github.io/BookWise/index.html" target="_blank">BookWise Full Documentation (HTML)</a>
+- [Issue Tracker](https://github.com/joesalaz/bookwise/issues)
+- [Project Board](https://github.com/joesalaz/bookwise/projects)
+- [MIT License](./LICENSE)
 
 ---
 
 ## License
 
-This project is open source under the MIT License.
-
----
-
-## Resources
-
-- <a href="https://tailwindcss.com/docs/" target="_blank">Tailwind CSS Documentation</a>
-- <a href="https://sequelize.org/master/" target="_blank">Sequelize Documentation</a>
-- <a href="https://expressjs.com/" target="_blank">Express Documentation</a>
+This project is open source under the [MIT License](./LICENSE).
 
 ```
+
+

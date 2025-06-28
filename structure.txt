@@ -1,0 +1,63 @@
+BookWise
+|-- docs
+│   \-- index.html
+|-- public
+│   |-- images
+│   |-- javascripts
+│   │   |-- mobile-nav.js
+│   │   \-- modals.js
+│   |-- stylesheets
+│   │   |-- output.css
+│   │   \-- tailwind.css
+│   \-- uploads
+|-- server
+│   |-- app.js
+│   |-- bin
+│   │   \-- www
+│   |-- classes
+│   |-- config
+│   │   \-- config.json
+│   |-- migrations
+│   │   |-- 20250623070731-create-users.js
+│   │   |-- 20250623070754-create-categories.js
+│   │   \-- 20250623070803-create-books.js
+│   |-- models
+│   │   |-- book.js
+│   │   |-- category.js
+│   │   |-- index.js
+│   │   \-- user.js
+│   |-- routes
+│   │   |-- book.js
+│   │   |-- books.js
+│   │   |-- dashboard.js
+│   │   |-- index.js
+│   │   \-- users.js
+│   |-- seeders
+│   │   |-- 20250615032806-demo-user.js
+│   │   |-- 20250615034556-demo-category.js
+│   │   \-- 20250615035608-demo-book.js
+│   \-- views
+│       |-- book.hbs
+│       |-- books.hbs
+│       |-- dashboard.hbs
+│       |-- error.hbs
+│       |-- landing.hbs
+│       |-- layouts
+│       │   \-- layout.hbs
+│       \-- partials
+│           |-- modals
+│           │   |-- aboutModal.hbs
+│           │   |-- authModal.hbs
+│           │   \-- contactModal.hbs
+│           \-- structure
+│               |-- footer-dashboard.hbs
+│               |-- footer-landing.hbs
+│               \-- header.hbs
+|-- .env.example
+|-- .gitignore
+|-- generate-tree.js
+|-- LICENSE
+|-- package-lock.json
+|-- package.json
+|-- README.md
+\-- tailwind.config.js
