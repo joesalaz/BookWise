@@ -1,4 +1,45 @@
-<div id="authModal" class="fixed inset-0 bg-black bg-opacity-40 items-center justify-center z-50 hidden">
+{{!-- filepath: server/views/partials/modals/authModal.hbs --}}
+<div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-8 relative">
+    <button id="closeAuthModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+    <h2 id="authModalTitle" class="text-2xl font-bold text-center mb-6">Sign Up</h2>
+
+    <!-- Sign Up Form -->
+    <form id="signupForm" class="space-y-4" method="POST" action="/signup">
+      {{#if signupError}}
+        <div class="bg-red-100 text-red-700 px-4 py-2 rounded">{{signupError}}</div>
+      {{/if}}
+      <input type="text" name="username" placeholder="Username" required class="w-full px-3 py-2 border rounded" />
+      <input type="email" name="email" placeholder="Email" required class="w-full px-3 py-2 border rounded" />
+      <input type="password" name="password" placeholder="Password" required class="w-full px-3 py-2 border rounded" />
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Sign Up</button>
+    </form>
+
+    <!-- Login Form (hidden by default) -->
+    <form id="loginForm" class="space-y-4 hidden" method="POST" action="/login">
+      {{#if loginError}}
+        <div class="bg-red-100 text-red-700 px-4 py-2 rounded">{{loginError}}</div>
+      {{/if}}
+      <input type="email" name="email" placeholder="Email" required class="w-full px-3 py-2 border rounded" />
+      <input type="password" name="password" placeholder="Password" required class="w-full px-3 py-2 border rounded" />
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Log In</button>
+    </form>
+
+    <!-- Toggle Link -->
+    <div class="text-center mt-4">
+      <span id="toggleToLogin" class="text-blue-700 hover:underline cursor-pointer">Already have an account? Log in</span>
+      <span id="toggleToSignup" class="text-blue-700 hover:underline cursor-pointer hidden">Don't have an account? Sign up</span>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+{{!-- <div id="authModal" class="fixed inset-0 bg-black bg-opacity-40 items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full text-center">
             <h2 class="text-xl font-bold mb-4">Welcome to BookWise</h2>
             <p class="mb-4 text-gray-800">Sign up to create your library or log in if you already have an account.</p>
@@ -8,4 +49,4 @@
                 In</a>
             <button id="closeAuthModal" class="mt-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Close</button>
         </div>
-        </div>
+        </div> --}}
