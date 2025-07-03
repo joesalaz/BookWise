@@ -7,9 +7,10 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var dashboardRouter = require("./routes/dashboard");
-var bookRouter = require("./routes/book");
-var booksRouter = require("./routes/books");
+const dashboardRouter = require("./routes/dashboard");
+const bookRouter = require("./routes/book");
+const booksRouter = require("./routes/books");
+const authRouter = require("./routes/auth"); // Import the auth router
 const hbs = require("hbs");
 const fs = require("fs");
 
@@ -41,8 +42,7 @@ function registerPartialsRecursively(dir, partialsRoot = dir) {
 // Just call this once, pointing to your partials folder.
 // Now I can use partials from any subfolder, like {{> structure/footer-dashboard}}
 registerPartialsRecursively(path.join(__dirname, "views/partials"));
-// hbs.registerPartials(__dirname + "/views/partials/structure");
-// hbs.registerPartials(__dirname + "/views/partials/modals");
+
 
 var app = express();
 
@@ -73,6 +73,7 @@ app.use("/users", usersRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/book", bookRouter);
 app.use("/books", booksRouter);
+app.use("/auth", authRouter); // Use the auth router for authentication routes
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

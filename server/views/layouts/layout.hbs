@@ -18,8 +18,24 @@
       </main>
     
   
-  <script src="/javascripts/modals.js"></script>
+  <script type="module" src="/javascripts/modals.js"></script>
   <script src="/javascripts/mobile-nav.js"></script>
   <script type="module" src="/javascripts/auth-toggle.js"></script>
+
+
+  {{!-- If the server says showAuthModal is true, this script will open the auth modal automatically
+  when the page loads. It's so users see error messages (like signup/login errors) right away.
+  It just removes the 'hidden' class and adds 'flex' to the modal so it pops up.
+   --}}
+  <script>    
+    {{#if showAuthModal}}
+    document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('authModal').classList.remove('hidden');
+    document.getElementById('authModal').classList.add('flex');    // Hides modal (display: none)
+  });
+
+
+{{/if}}
+  </script>
   </body>
 </html>

@@ -5,10 +5,10 @@
   "scripts": {
     "start": "node server/bin/www",
     "tree": "node node_modules\\tree-node-cli\\bin\\tree.js -a -I \".env|books.sqlite|structure.txt|node_modules|.git\" > structure.txt"
-    
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
+    "bcrypt": "^6.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.5.0",
@@ -17,6 +17,7 @@
     "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
+    "nodemailer": "^7.0.4",
     "nodemon": "^3.1.10",
     "sequelize": "^6.37.7",
     "sequelize-cli": "^6.6.3",

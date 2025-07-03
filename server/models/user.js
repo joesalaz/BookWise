@@ -1,33 +1,58 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association: User has many books and categories
-      User.hasMany(models.Book, { foreignKey:'userId'});
-      User.hasMany(models.Category, { foreignKey: 'userId'});
+      // User has many books and categories
+      User.hasMany(models.Book, { foreignKey: 'userId' });
+      User.hasMany(models.Category, { foreignKey: 'userId' });
     }
   }
-  User.init({
-    email: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    name: DataTypes.STRING,
-    lastName: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'User',
-    tableName: 'Users',
-    timestamps: true,
-  
-
-  });
+  User.init(
+    {
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: { isEmail: true }
+      },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      verificationToken: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      verificationTokenExpires: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+      isVerified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      }
+    },
+    {
+      sequelize,
+      modelName: "User",
+      tableName: "Users",
+      timestamps: true
+    }
+  );
   return User;
 };

@@ -1,9 +1,11 @@
 BookWise
-|-- docs
-│   \-- index.html
 |-- public
+│   |-- classes
+│   │   |-- ModalManager.js
+│   │   \-- Toggle.js
 │   |-- images
 │   |-- javascripts
+│   │   |-- auth-toggle.js
 │   │   |-- mobile-nav.js
 │   │   \-- modals.js
 │   |-- stylesheets
@@ -17,8 +19,11 @@ BookWise
 │   |-- classes
 │   |-- config
 │   │   \-- config.json
+│   |-- controllers
+│   │   \-- authController.js
 │   |-- migrations
 │   │   |-- 20250623070731-create-users.js
+│   │   |-- 20250623070740-add-verification-fields-to-users.js
 │   │   |-- 20250623070754-create-categories.js
 │   │   \-- 20250623070803-create-books.js
 │   |-- models
@@ -27,18 +32,22 @@ BookWise
 │   │   |-- index.js
 │   │   \-- user.js
 │   |-- routes
+│   │   |-- auth.js
 │   │   |-- book.js
 │   │   |-- books.js
 │   │   |-- dashboard.js
 │   │   |-- index.js
 │   │   \-- users.js
+│   |-- routes.auth.js
 │   |-- seeders
 │   │   |-- 20250615032806-demo-user.js
 │   │   |-- 20250615034556-demo-category.js
 │   │   \-- 20250615035608-demo-book.js
+│   |-- test-smtp.js
 │   \-- views
 │       |-- book.hbs
 │       |-- books.hbs
+│       |-- check-email.hbs
 │       |-- dashboard.hbs
 │       |-- error.hbs
 │       |-- landing.hbs
@@ -60,4 +69,5 @@ BookWise
 |-- package-lock.json
 |-- package.json
 |-- README.md
-\-- tailwind.config.js
+|-- tailwind.config.js
+\-- .sequelizerc

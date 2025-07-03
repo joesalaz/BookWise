@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const ROOT = process.argv[2] || ".";
+const ROOT = process.argv[5] || ".";
 const IGNORE = [
   ".env",
   "books.sqlite",
