@@ -1,0 +1,7 @@
+GPG Commit Verification Test
+
+I realized after starting this project that I had not set up GPG signing for my commits, which means my earlier commits are not marked as "Verified" on GitHub. This was an oversight on my part, as verified commits help prove authorship and add credibility to my work—especially for potential employers or collaborators reviewing this repository.
+
+This file and its commit serve as a test and confirmation that GPG signing is now enabled for all future commits. Going forward, all my commits will be signed and verified to ensure authenticity and transparency in the development of BookWise.
+
+Thank you
