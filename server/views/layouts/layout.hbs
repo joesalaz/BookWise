@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/stylesheets/output.css"/>   
     <link
       href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Barlow:wght@400;700&family=Inter:wght@400;700&family=Lato:wght@400;700&family=Marhey:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@400;700&family=Nunito:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;700&family=Quicksand:wght@400;700&family=Raleway:wght@400;700&family=Roboto:wght@400;700&family=Source+Sans+3:wght@400;700&display=swap"
-      rel="stylesheet">  
+      rel="stylesheet"> 
+      
   </head>
   <body class="bg-[#f7f7f7] text-[#222] font-inter min-h-screen flex flex-col">
       <!-- Page Content -->
@@ -16,8 +17,11 @@
         {{{body}}}
         
       </main>
+
     
-  
+    <script>
+      window.showLoginModal = {{#if showLoginModal}}true{{else}}false{{/if}};
+    </script>
   <script type="module" src="/javascripts/modals.js"></script>
   <script src="/javascripts/mobile-nav.js"></script>
   <script type="module" src="/javascripts/auth-toggle.js"></script>
@@ -27,15 +31,16 @@
   when the page loads. It's so users see error messages (like signup/login errors) right away.
   It just removes the 'hidden' class and adds 'flex' to the modal so it pops up.
    --}}
-  <script>    
-    {{#if showAuthModal}}
-    document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('authModal').classList.remove('hidden');
-    document.getElementById('authModal').classList.add('flex');    // Hides modal (display: none)
-  });
 
+{{#if showAuthModal}}
+      <script>
+        window.addEventListener('DOMContentLoaded', function() {
+      if (typeof openAuthModal === 'function') {
+          openAuthModal('login');
+      }
+    });
+    </script>
+  {{/if}}
 
-{{/if}}
-  </script>
   </body>
 </html>

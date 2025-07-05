@@ -5,8 +5,10 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const sessionMiddleware = require("./middleware/session"); 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+const requireAuth = require("./middleware/auth");// Import the authentication middleware
 const dashboardRouter = require("./routes/dashboard");
 const bookRouter = require("./routes/book");
 const booksRouter = require("./routes/books");
@@ -46,8 +48,7 @@ registerPartialsRecursively(path.join(__dirname, "views/partials"));
 
 var app = express();
 
-//Initialize express session
-const session = require("express-session");
+
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -60,19 +61,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../public")));
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET, // Using my own secret key
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+app.use(sessionMiddleware); // Use the session middleware
 
+// Middleware to protect routes by checking if the user is authenticated
+// If the user is logged in (req.session.user exists), allow access to the route.
+const protectedRoutes = [ // Add your protected routes here
+  { path: "/dashboard", router: dashboardRouter },
+  { path: "/book", router: bookRouter },
+  { path: "/books", router: booksRouter },
+
+  // { path: '/profile', router: profileRouter }, // Add more protected routes here
+];
+
+protectedRoutes.forEach(({ path, router }) => {
+  app.use(path, requireAuth, router);
+});
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/dashboard", dashboardRouter);
-app.use("/book", bookRouter);
-app.use("/books", booksRouter);
 app.use("/auth", authRouter); // Use the auth router for authentication routes
 
 // catch 404 and forward to error handler

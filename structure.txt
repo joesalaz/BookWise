@@ -21,6 +21,9 @@ BookWise
 │   │   \-- config.json
 │   |-- controllers
 │   │   \-- authController.js
+│   |-- middleware
+│   │   |-- auth.js
+│   │   \-- session.js
 │   |-- migrations
 │   │   |-- 20250623070731-create-users.js
 │   │   |-- 20250623070740-add-verification-fields-to-users.js
@@ -61,7 +64,8 @@ BookWise
 │           \-- structure
 │               |-- footer-dashboard.hbs
 │               |-- footer-landing.hbs
-│               \-- header.hbs
+│               |-- header-dashboard.hbs
+│               \-- header-landing.hbs
 |-- .env.example
 |-- .gitignore
 |-- generate-tree.js
@@ -70,4 +74,5 @@ BookWise
 |-- package.json
 |-- README.md
 |-- tailwind.config.js
-\-- .sequelizerc
+|-- .sequelizerc
+\-- gpg-test.txt

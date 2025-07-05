@@ -19,9 +19,24 @@ router.get("/verify-email", verifyEmail);
 // Handle POST /auth/resend-verification
 router.post("/resend-verification", resendVerificationEmail);
 
-// (Optional) Render login page (GET /auth/login)
 router.get("/login", (req, res) => {
-  res.render("login", { title: "BookWise Login" });
+  const successMessage = req.session.successMessage;
+  delete req.session.successMessage;
+  res.render("login", { title: "BookWise Login", successMessage });
+});
+
+// Handle POST /auth/login
+router.post("/login", authController.login); 
+
+// Handle GET /auth/logout
+router.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err);
+      return res.status(500).send("Internal Server Error");
+    }
+    res.redirect("/");
+  });
 });
 
 module.exports = router;

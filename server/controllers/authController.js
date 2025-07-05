@@ -94,3 +94,165 @@ exports.signup = async (req, res) => {
     });
   }
 };
+
+
+exports.verifyEmail = async (req, res) => {
+  try {
+    const { token } = req.query;
+    if (!token) {
+      return res.render("check-email", {
+        error: "Invalid or missing verification token.",
+      });
+    }
+
+    const user = await User.findOne({ where: { verificationToken: token } });
+    if (!user) {
+      return res.render("check-email", {
+        error: "Invalid or expired verification token.",
+      });
+    }
+
+    if (user.verificationTokenExpires < new Date()) {
+      return res.render("check-email", {
+        error: "Verification token has expired.",
+        showResend: true,
+        email: user.email,
+      });
+    }
+
+    user.isVerified = true;
+    user.verificationToken = null;
+    user.verificationTokenExpires = null;
+    await user.save();
+
+    // Set a flash message in session
+    req.session.successMessage = "Email has been verified! You can now login.";
+    return res.redirect("/?showLogin=1"); // Redirect to landing page with login modal open
+  } catch (error) {
+    console.error("Email verification error:", error);
+    return res.render("check-email", {
+      error: "Server error during verification.",
+    });
+  }
+};
+
+exports.resendVerificationEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.render("check-email", {
+        error: "Email is required to resend verification.",
+      });
+    }
+
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.render("check-email", {
+        error: "No account found with that email.",
+      });
+    }
+
+    if (user.isVerified) {
+      return res.render("check-email", {
+        error: "This email is already verified. Please log in.",
+      });
+    }
+
+    // Generate new token and expiry
+    const verificationToken = crypto.randomBytes(32).toString("hex");
+    const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+
+    user.verificationToken = verificationToken;
+    user.verificationTokenExpires = verificationTokenExpires;
+    await user.save();
+
+    // Use BASE_URL from environment
+    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+    const verificationUrl = `${baseUrl}/auth/verify-email?token=${verificationToken}`;
+
+    const transporter = nodemailer.createTransport({
+      host: "smtp.resend.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: "resend",
+        pass: process.env.RESEND_API_KEY,
+      },
+    });
+
+    await transporter.sendMail({
+      from: '"BookWise" <noreply@bookwise.joesalaz.com>',
+      to: email,
+      subject: "Verify your BookWise account",
+      html: `<p>Click <a href="${verificationUrl}">here</a> to verify your email.</p>`,
+    });
+
+    return res.render("check-email", {
+      email,
+      message:
+        "A new verification email has been sent. Please check your inbox.",
+    });
+  } catch (error) {
+    console.error("Resend verification error:", error);
+    return res.render("check-email", {
+      error: "Server error while resending verification email.",
+    });
+  }
+};
+
+
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+      return res.render("login", {
+        title: "BookWise Login",
+        loginError: "Email and password are required.",
+      });
+    }
+
+    // Find user by email
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.render("login", {
+        title: "BookWise Login",
+        loginError: "Invalid email or password.",
+      });
+    }
+
+    // Check if user is verified
+    if (!user.isVerified) {
+      return res.render("login", {
+        title: "BookWise Login",
+        loginError: "Please verify your email before logging in.",
+      });
+    }
+
+    // Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.render("login", {
+        title: "BookWise Login",
+        loginError: "Invalid email or password.",
+      });
+    }
+
+    // Login successful: set session here
+    req.session.user = {
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      // add any other info you want to store
+    };
+    // Redirect to dashboard or home page
+    return res.redirect("/dashboard");
+  } catch (error) {
+    console.error("Login error:", error);
+    return res.render("login", {
+      title: "BookWise Login",
+      loginError: "Server error during login.",
+    });
+  }
+};

@@ -1,6 +1,3 @@
-```markdown
-
-```markdown
 # BookWise
 
 BookWise is a modern personal library management app that lets users organize, review, and explore their book collection with ease.
@@ -19,8 +16,19 @@ BookWise is a modern personal library management app that lets users organize, r
 - **Email verification with token expiry and resend functionality**
 - Responsive dashboard and profile pages
 - Search and filter books by title, author, or category
+- Sliding session expiration (users stay logged in while active)
+- **Session expiration handling:** users are redirected to the landing page with a session expired message and the login modal opens automatically
+- Logout route to securely end user sessions
+
+---
+
+## Contributing
+
+> **Note:** All commits are now GPG signed and verified. Earlier commits were unsigned due to initial setup, but this has been rectified for transparency and authenticity.
+---
 
 **Planned:**
+
 - Category management (add, edit, delete)
 - In-app reading (EPUB, PDF, plain text/HTML)
 - Book cover uploads
@@ -38,17 +46,28 @@ BookWise is a modern personal library management app that lets users organize, r
 - Verification emails are sent using Resend SMTP.
 - Tokens expire after 24 hours; users can request a new verification email if needed.
 - Only verified users can log in.
+- **After successful email verification, users are redirected to the landing page, the login modal opens automatically, and a success message is displayed.**
+
+---
+
+### Session Expiration & Logout
+
+- Sessions use sliding expiration: users stay logged in as long as they are active.
+- If a session expires due to inactivity, the user is redirected to the landing page, sees a "Your session has expired! Please, login again." message, and the login modal opens automatically.
+- Users can log out at any time via the logout route, which destroys the session and redirects to the landing page.
 
 ---
 
 **Progress:**
+
 - [x] Generate and store verification tokens on signup
 - [x] Send verification email using Resend SMTP
 - [x] Create a “Check your email” page after signup
 - [x] Add /auth/verify-email route and controller logic
-- [ ] Create login page with success message after verification
-- [ ] Redirect to login page with "Email has been verified! You can now login" message
+- [x] Redirect to landing page with login modal open and success message after email verification
 - [x] Update login logic to require verified email
+- [x] Implement sliding session expiration and session expired modal flow
+
 ---
 
 ## Quick Start
@@ -67,6 +86,74 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
+## Project Structure
+
+bookwise/
+|-- public/
+|   |-- classes/               # Reusable JS classes (ModalManager, Toggle)
+|   |-- images/                # Static images for the app (planned)
+|   |-- javascripts/           # Client-side JavaScript files
+|   |-- stylesheets/           # Tailwind source and output CSS
+|   |-- uploads/               # Book cover images (planned)
+|-- server/
+|   |-- app.js                 # Main Express app
+|   |-- bin/
+|   |   \-- www                # App entry point
+|   |-- classes/               # Custom JS classes for OOP code
+|   |-- config/
+|   |   \-- config.json        # Database configuration
+|   |-- controllers/
+|   |   \-- authController.js  # Auth logic and email verification
+|   |-- middleware/            # Custom Express middleware
+|   |   |-- auth.js
+|   |   \-- session.js
+|   |-- migrations/            # Sequelize migration files
+|   |-- models/                # Sequelize models (User, Book, Category, etc.)
+|   |-- routes/                # Express route files
+|   |   |-- auth.js
+|   |   |-- book.js
+|   |   |-- books.js
+|   |   |-- dashboard.js
+|   |   |-- index.js
+|   |   \-- users.js
+|   |-- seeders/               # Sequelize seed files
+|   |-- test-smtp.js           # SMTP test script for email
+|   \-- views/
+|       |-- book.hbs
+|       |-- books.hbs
+|       |-- check-email.hbs
+|       |-- dashboard.hbs
+|       |-- error.hbs
+|       |-- landing.hbs
+|       |-- layouts/
+|       |   \-- layout.hbs
+|       \-- partials/
+|           |-- modals/
+|           |   |-- aboutModal.hbs
+|           |   |-- authModal.hbs
+|           |   \-- contactModal.hbs
+|           \-- structure/
+|               |-- footer-dashboard.hbs
+|               |-- footer-landing.hbs
+|               |-- header-dashboard.hbs
+|               \-- header-landing.hbs
+|-- .env.example               # Example environment variables file
+|-- .gitignore                 # Node, DB, and other ignores
+|-- generate-tree.js           # Script to generate this tree
+|-- LICENSE                    # MIT opensource license
+|-- package-lock.json
+|-- package.json
+|-- README.md                  # Main documentation  
+|-- tailwind.config.js         # Tailwind CSS configuration
+|-- .sequelizerc               # Sequelize config
+\-- gpg-test.txt               # GPG test file
+
+---
+For details on layouts and modals, see [Project Structure Update](../../wiki/Project-Structure-Update).  
+Return to the [Wiki Home](../../wiki).
+
+---
+
 ## 📚 Full Documentation
 
 See the [BookWise Wiki](https://github.com/joesalaz/bookwise/wiki) for:
@@ -76,6 +163,7 @@ See the [BookWise Wiki](https://github.com/joesalaz/bookwise/wiki) for:
 - Project Structure
 - Usage Guide
 - Email Verification Flow
+- **Session Expiration & Modal Flow**
 - Troubleshooting
 - Contribution Guide
 - Roadmap
@@ -95,12 +183,10 @@ See the [BookWise Wiki](https://github.com/joesalaz/bookwise/wiki) for:
 
 This project is open source under the [MIT License](./LICENSE).
 
-```
 **Key changes:**
-- Added “Secure user authentication (signup & login)” and “Email verification with token expiry and resend functionality” to the Features list.
-- Added a new “Email Verification” section with a summary of the flow.
-- Added “Email Verification Flow” to the Wiki documentation list.
-- Kept the rest of your README structure and content intact for coherence.
 
-
-
+- Added “Session expiration handling” to the Features list.
+- Updated the Email Verification section to reflect the new redirect/modal flow.
+- Added a new “Session Expiration & Logout” section.
+- Updated the Progress checklist.
+- Added “Session Expiration & Modal Flow” to the Wiki documentation list.
