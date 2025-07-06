@@ -94,6 +94,7 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
+```text
 bookwise/
 |-- public/
 |   |-- classes/               # Reusable JS classes (ModalManager, Toggle)
@@ -153,6 +154,7 @@ bookwise/
 |-- tailwind.config.js         # Tailwind CSS configuration
 |-- .sequelizerc               # Sequelize config
 \-- gpg-test.txt               # GPG test file
+```
 
 ---
 For details on layouts and modals, see [Project Structure Update](../../wiki/Project-Structure-Update).  
