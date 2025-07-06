@@ -1,9 +1,11 @@
-<!-- Header -->
 <header class="bg-gradient-to-br from-blue-100 to-blue-300 mx-auto w-full py-6 shadow text-blue-900">
     <div class="container mx-auto flex justify-between items-center px-4">
-        <h1 class="text-3xl md:text-3xl text-title-blue font-bold font-nunito">{{title}}</h1>
+        <div class="flex flex-col items-center gap-0">
+            <img src="/images/bookwise-high-resolution-logo-transparent.png" alt="BookWise Logo" class="h-16 md:h-20" style="width:auto;" />
+            <h1 class="text-3xl md:text-3xl text-title-blue font-bold font-nunito mb-0">{{title}}</h1>
+        </div>
         <!-- Hamburger Button (Mobile) -->
-        <button id="menuBtn" class="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-700"
+        <button id="menuBtn" class=" flex md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-700"
             aria-label="Open Menu">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -11,27 +13,19 @@
         </button>
         <!-- Desktop Menu -->
         <nav id="mainNav" class="font-raleway hidden md:flex space-x-4">
-            <a href="/"
-                class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Home</a>
-            <a href="/library"
-                class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Library</a>
-            <a href="/profile"
-                class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Profile</a>
-            <a href="/auth/logout"
-                class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Logout</a>
+            <a href="/" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Home</a>
+            <a href="/library" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Library</a>
+            <a href="/profile" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Profile</a>
+            <a href="/auth/logout" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Logout</a>
         </nav>
     </div>
     <!-- Mobile Menu (Dropdown) -->
     <div id="mobileNav" class="md:hidden hidden px-4 pb-4">
         <nav class="flex flex-col items-center space-y-2">
-            <a href="/"
-                class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Home</a>
-            <a href="/library"
-                class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Library</a>
-            <a href="/profile"
-                class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Profile</a>
-            <a href="/auth/logout"
-                class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Logout</a>
+            <a href="/" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Home</a>
+            <a href="/library" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Library</a>
+            <a href="/profile" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Profile</a>
+            <a href="/auth/logout" class="font-semibold text-blue-900 hover:text-blue-700 hover:underline transition-colors">Logout</a>
         </nav>
     </div>
 </header>

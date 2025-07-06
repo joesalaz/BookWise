@@ -22,6 +22,12 @@ BookWise is a modern personal library management app that lets users organize, r
 
 ---
 
+## Demo
+
+[View the live demo](https://bookwise-whus.onrender.com/)
+
+---
+
 ## Contributing
 
 > **Note:** All commits are now GPG signed and verified. Earlier commits were unsigned due to initial setup, but this has been rectified for transparency and authenticity.
