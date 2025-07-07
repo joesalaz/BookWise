@@ -37,11 +37,16 @@
 {{#if showAuthModal}}
       <script>
         window.addEventListener('DOMContentLoaded', function() {
-      if (typeof openAuthModal === 'function') {
-          openAuthModal('login');
-      }
-    });
-    </script>
+          console.log('Opening auth modal');
+          console.log('Login error:', {{#if loginError}}'{{loginError}}'{{else}}null{{/if}});
+          console.log('Signup error:', {{#if signupError}}'{{signupError}}'{{else}}null{{/if}});
+          if (typeof openAuthModal === 'function') {
+              // Open in signup mode if there's a signup error, otherwise login mode
+              const mode = {{#if signupError}}'signup'{{else}}'login'{{/if}};
+              openAuthModal(mode);
+          }
+        });
+      </script>
   {{/if}}
 
   </body>

@@ -207,35 +207,43 @@ exports.login = async (req, res) => {
 
     // Validate input
     if (!email || !password) {
-      return res.render("login", {
-        title: "BookWise Login",
+      return res.render("landing", {
+        title: "BookWise",
         loginError: "Email and password are required.",
+        showAuthModal: true,
+        defaultMode: "login"
       });
     }
 
     // Find user by email
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.render("login", {
-        title: "BookWise Login",
+      return res.render("landing", {
+        title: "BookWise",
         loginError: "Invalid email or password.",
+        showAuthModal: true,
+        defaultMode: "login"
       });
     }
 
     // Check if user is verified
     if (!user.isVerified) {
-      return res.render("login", {
-        title: "BookWise Login",
+      return res.render("landing", {
+        title: "BookWise",
         loginError: "Please verify your email before logging in.",
+        showAuthModal: true,
+        defaultMode: "login"
       });
     }
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.render("login", {
-        title: "BookWise Login",
+      return res.render("landing", {
+        title: "BookWise",
         loginError: "Invalid email or password.",
+        showAuthModal: true,
+        defaultMode: "login" // Ensure modal opens in login mode
       });
     }
 
@@ -250,9 +258,11 @@ exports.login = async (req, res) => {
     return res.redirect("/dashboard");
   } catch (error) {
     console.error("Login error:", error);
-    return res.render("login", {
-      title: "BookWise Login",
+    return res.render("landing", {
+      title: "BookWise",
       loginError: "Server error during login.",
+      showAuthModal: true,
+      defaultMode: "login"
     });
   }
 };
