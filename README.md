@@ -92,6 +92,41 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
+## Production Considerations
+
+BookWise works great out of the box for development and small-scale deployments. If you're planning to use this in a production environment with multiple users or want to scale it up, here are some things you'll want to address:
+
+### Session Storage
+
+The app currently uses Express's default in-memory session store. While this works fine for development, it has some limitations in production:
+
+- Sessions don't persist across server restarts
+- Memory usage grows over time without cleanup
+- Can't scale across multiple server instances
+
+For production use, consider switching to:
+
+- **Redis** - Fast and reliable, great for high-traffic apps
+- **Database sessions** - Store sessions in your existing database
+- **MongoDB sessions** - If you prefer document-based storage
+
+You might notice a warning about this in your deployment logs - that's normal and expected.
+
+### Database
+
+The default SQLite setup is perfect for getting started, but for production you might want to consider PostgreSQL or MySQL for better performance with concurrent users.
+
+### Other Considerations
+
+- Set up proper environment variables for production
+- Configure HTTPS and security headers
+- Add rate limiting and request validation
+- Set up logging and monitoring
+
+These aren't urgent for getting started, but they become important as your the application grows.
+
+---
+
 ## Project Structure
 
 ```text
