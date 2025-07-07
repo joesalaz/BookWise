@@ -14,28 +14,26 @@ window.openAuthModal = function (mode = "signup") {
 };
 
 // Auto-open login modal if requested (e.g., after session expiration)
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   if (window.showLoginModal) {
-    window.openAuthModal('login');
+    window.openAuthModal("login");
   }
 });
 
-
-
 // Demo button logic
-document.addEventListener('DOMContentLoaded', function() {
-  const demoBtn = document.getElementById('demoBtn');
+document.addEventListener("DOMContentLoaded", function () {
+  const demoBtn = document.getElementById("demoBtn");
   if (demoBtn) {
-    demoBtn.addEventListener('click', function(e) {
+    demoBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      window.openAuthModal('login');
+      window.openAuthModal("login");
       // Wait a tick to ensure modal and form are visible
       setTimeout(() => {
-        const usernameInput = document.getElementById('login-email');
-        const passwordInput = document.getElementById('login-password');
+        const usernameInput = document.getElementById("login-email");
+        const passwordInput = document.getElementById("login-password");
         if (usernameInput && passwordInput) {
           usernameInput.value = "demo@bookwise.com";
-          passwordInput.value = 'demo-password';
+          passwordInput.value = "demo-password";
         }
       }, 100);
     });

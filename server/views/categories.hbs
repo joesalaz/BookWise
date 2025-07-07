@@ -1,0 +1,160 @@
+{{!-- Header --}}
+{{> structure/header-dashboard}}
+
+<!-- Main Content -->
+<main class="flex-1 w-full mx-auto px-4 sm:px-0 lg:px-16 py-8 md:py-16">
+    <div class="max-w-6xl mx-auto">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-feature-blue mb-2">Manage Categories</h1>
+            <p class="text-blue-900">Organize your books into categories for better management</p>
+        </div>
+
+        <!-- Add Category Section -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4 flex items-center">
+                <svg class="w-6 h-6 text-blue-700 mr-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                Add New Category
+            </h2>
+            <form id="addCategoryForm" class="flex gap-4 items-end">
+                <div class="flex-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Category Name</label>
+                    <input 
+                        type="text" 
+                        id="categoryName" 
+                        name="name" 
+                        placeholder="Enter category name" 
+                        class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-700"
+                        required
+                    />
+                </div>
+                <button 
+                    type="submit" 
+                    class="bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800 transition"
+                >
+                    Add Category
+                </button>
+            </form>
+            <div id="addCategoryMessage" class="mt-4 hidden"></div>
+        </div>
+
+        <!-- Categories List -->
+        <div class="bg-white rounded-lg shadow">
+            <div class="px-6 py-4 border-b">
+                <h2 class="text-xl font-semibold flex items-center">
+                    <svg class="w-6 h-6 text-blue-700 mr-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V6.75A2.25 2.25 0 014.5 4.5h6a2.25 2.25 0 011.59.66l8.25 8.25a2.25 2.25 0 010 3.18l-6 6a2.25 2.25 0 01-3.18 0l-8.25-8.25A2.25 2.25 0 012.25 12.75z" />
+                    </svg>
+                    Your Categories
+                </h2>
+            </div>
+            
+            <div id="categoriesContainer" class="divide-y">
+                {{#if categories}}
+                    {{#each categories}}
+                        <div class="category-item px-6 py-4 flex items-center justify-between hover:bg-gray-50" data-id="{{id}}">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-blue-700 mr-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                                </svg>
+                                <span class="category-name text-lg font-medium text-gray-900">{{name}}</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm text-blue-900 bg-blue-50 px-2 py-1 rounded">
+                                    {{#if bookCount}}{{bookCount}}{{else}}0{{/if}} books
+                                </span>
+                                <button 
+                                    class="edit-btn text-blue-700 hover:text-blue-900 p-1" 
+                                    title="Edit category"
+                                >
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                    </svg>
+                                </button>
+                                <button 
+                                    class="delete-btn text-red-600 hover:text-red-800 p-1" 
+                                    title="Delete category"
+                                >
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    {{/each}}
+                {{else}}
+                    <div class="px-6 py-12 text-center text-gray-500">
+                        <svg class="w-12 h-12 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                        </svg>
+                        <p class="text-lg">No categories yet</p>
+                        <p class="text-sm">Create your first category to start organizing your books</p>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</main>
+
+{{!-- Footer --}}
+{{> structure/footer-dashboard}}
+
+<!-- JavaScript for category management -->
+<script>
+// Basic category management - could be refactored into a class later
+document.addEventListener('DOMContentLoaded', function() {
+    const addForm = document.getElementById('addCategoryForm');
+    const messageDiv = document.getElementById('addCategoryMessage');
+    
+    // Add category
+    addForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(addForm);
+        const name = formData.get('name').trim();
+        
+        if (!name) {
+            showMessage('Please enter a category name', 'error');
+            return;
+        }
+        
+        try {
+            const response = await fetch('/categories/api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+                showMessage('Category added successfully!', 'success');
+                addForm.reset();
+                // TODO: Refresh categories list without page reload
+                setTimeout(() => location.reload(), 1000);
+            } else {
+                showMessage(result.error || 'Failed to add category', 'error');
+            }
+        } catch (error) {
+            console.error('Error adding category:', error);
+            showMessage('Network error. Please try again.', 'error');
+        }
+    });
+    
+    // Edit and delete handlers would go here
+    // For now, just basic functionality to get MVP working
+    
+    function showMessage(text, type) {
+        messageDiv.textContent = text;
+        messageDiv.className = `mt-4 p-3 rounded ${type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`;
+        messageDiv.classList.remove('hidden');
+        
+        setTimeout(() => {
+            messageDiv.classList.add('hidden');
+        }, 3000);
+    }
+});
+</script>

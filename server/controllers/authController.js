@@ -72,7 +72,9 @@ exports.signup = async (req, res) => {
         pass: process.env.RESEND_API_KEY,
       },
     });
-    const verificationUrl = `http://localhost:3000/auth/verify-email?token=${verificationToken}`;
+    // Use BASE_URL from environment
+    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+    const verificationUrl = `${baseUrl}/auth/verify-email?token=${verificationToken}`;
     await transporter.sendMail({
       from: '"BookWise" <noreply@bookwise.joesalaz.com>',
       to: email,
@@ -88,13 +90,12 @@ exports.signup = async (req, res) => {
   } catch (error) {
     console.error("Signup error:", error);
     return res.render("landing", {
-        title: "BookWise",
+      title: "BookWise",
       signupError: "Server error during signup.",
       showAuthModal: true,
     });
   }
 };
-
 
 exports.verifyEmail = async (req, res) => {
   try {
@@ -199,7 +200,6 @@ exports.resendVerificationEmail = async (req, res) => {
     });
   }
 };
-
 
 exports.login = async (req, res) => {
   try {

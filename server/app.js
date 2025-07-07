@@ -12,6 +12,7 @@ const requireAuth = require("./middleware/auth");// Import the authentication mi
 const dashboardRouter = require("./routes/dashboard");
 const bookRouter = require("./routes/book");
 const booksRouter = require("./routes/books");
+const categoriesRouter = require("./routes/categories");
 const authRouter = require("./routes/auth"); // Import the auth router
 const hbs = require("hbs");
 const fs = require("fs");
@@ -69,6 +70,7 @@ const protectedRoutes = [ // Add your protected routes here
   { path: "/dashboard", router: dashboardRouter },
   { path: "/book", router: bookRouter },
   { path: "/books", router: booksRouter },
+  { path: "/categories", router: categoriesRouter },
 
   // { path: '/profile', router: profileRouter }, // Add more protected routes here
 ];
