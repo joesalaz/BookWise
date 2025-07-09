@@ -4,6 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node server/bin/www",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:status": "npx sequelize-cli db:migrate:status",
+    "migrate:safe": "npx sequelize-cli db:migrate:status && npx sequelize-cli db:migrate",
+    "migrate:smart": "node smart-migrate.js",
+    "migrate:advanced": "node advanced-migrate.js",
     "tree": "node node_modules\\tree-node-cli\\bin\\tree.js -a -I \".env|books.sqlite|structure.txt|node_modules|.git\" > structure.txt"
   },
   "dependencies": {
@@ -19,6 +24,7 @@
     "morgan": "~1.9.1",
     "nodemailer": "^7.0.4",
     "nodemon": "^3.1.10",
+    "pg": "^8.11.0",
     "sequelize": "^6.37.7",
     "sequelize-cli": "^6.6.3",
     "sqlite3": "^5.1.7"
