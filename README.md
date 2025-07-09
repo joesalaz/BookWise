@@ -49,6 +49,42 @@ const mobileDropdown = DropdownUtils.createCustomDropdown(
 
 ---
 
+## Migration Safety Scripts
+
+BookWise includes smart migration scripts to prevent data loss during deployment:
+
+### Available Migration Commands
+
+```bash
+# Basic Sequelize commands
+npm run migrate               # Run all pending migrations (default)
+npm run migrate:status        # Check migration status
+
+# Safe migration commands
+npm run migrate:safe          # Check status then run migrations
+npm run migrate:smart         # Smart migration with pending check
+npm run migrate:advanced      # Advanced migration with backup support
+```
+
+### Migration Scripts
+
+- **`smart-migrate.js`** - Checks for pending migrations before running
+- **`advanced-migrate.js`** - Comprehensive safety with backup support  
+- **`migrate-safely.sh`** - Shell script wrapper for safe migrations
+
+### Production Safety
+
+These scripts prevent accidental data loss by:
+
+- Only running pending migrations (not all migrations)
+- Providing detailed logging of what's being executed
+- Offering backup support (advanced script)
+- Avoiding re-running already applied migrations
+
+**Recommended for production deployments:** Use `npm run migrate:smart` instead of `npm run migrate` to ensure safe database updates.
+
+---
+
 ## Demo
 
 [View the live demo](https://bookwise-whus.onrender.com/)
@@ -259,4 +295,5 @@ This project is open source under the [MIT License](./LICENSE).
 - Updated the Email Verification section to reflect the new redirect/modal flow.
 - Added a new “Session Expiration & Logout” section.
 - Updated the Progress checklist.
-- Added “Session Expiration & Modal Flow” to the Wiki documentation list.
+- Added “Session Expiration & Modal Flow” to the Wiki documentation list. 
+ 
