@@ -48,8 +48,8 @@
           console.log('Login error:', {{#if loginError}}'{{loginError}}'{{else}}null{{/if}});
           console.log('Signup error:', {{#if signupError}}'{{signupError}}'{{else}}null{{/if}});
           if (typeof openAuthModal === 'function') {
-              // Open in signup mode if there's a signup error, otherwise login mode
-              const mode = {{#if signupError}}'signup'{{else}}'login'{{/if}};
+              // Check for explicit defaultMode first, then fallback to error-based detection
+              const mode = {{#if defaultMode}}'{{defaultMode}}'{{else}}{{#if signupError}}'signup'{{else}}'login'{{/if}}{{/if}};
               openAuthModal(mode);
           }
         });

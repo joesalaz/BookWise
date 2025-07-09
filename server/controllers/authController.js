@@ -204,9 +204,13 @@ exports.resendVerificationEmail = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    
+    // Debug logging
+    console.log("Login attempt for email:", email);
 
     // Validate input
     if (!email || !password) {
+      console.log("Missing email or password");
       return res.render("landing", {
         title: "BookWise",
         loginError: "Email and password are required.",
@@ -217,7 +221,11 @@ exports.login = async (req, res) => {
 
     // Find user by email
     const user = await User.findOne({ where: { email } });
+    console.log("User found:", !!user);
+    console.log("User verified:", user?.isVerified);
+    
     if (!user) {
+      console.log("No user found with email:", email);
       return res.render("landing", {
         title: "BookWise",
         loginError: "Invalid email or password.",
@@ -228,6 +236,7 @@ exports.login = async (req, res) => {
 
     // Check if user is verified
     if (!user.isVerified) {
+      console.log("User not verified");
       return res.render("landing", {
         title: "BookWise",
         loginError: "Please verify your email before logging in.",
@@ -237,8 +246,12 @@ exports.login = async (req, res) => {
     }
 
     // Compare password
+    console.log("Comparing passwords...");
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log("Password match:", isMatch);
+    
     if (!isMatch) {
+      console.log("Password comparison failed");
       return res.render("landing", {
         title: "BookWise",
         loginError: "Invalid email or password.",
