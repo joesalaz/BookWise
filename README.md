@@ -8,7 +8,7 @@ BookWise is a modern personal library management app that lets users organize, r
 
 ## Features
 
-- Card-based dashboard for books and categories
+- Card- Added "Session Expiration & Modal Flow" to the Wiki documentation list.based dashboard for books and categories
 - Database models and associations for users, books, and categories
 - Seeders for demo users, books, and categories
 - Modern, scalable backend structure
@@ -19,6 +19,33 @@ BookWise is a modern personal library management app that lets users organize, r
 - Sliding session expiration (users stay logged in while active)
 - **Session expiration handling:** users are redirected to the landing page with a session expired message and the login modal opens automatically
 - Logout route to securely end user sessions
+
+---
+
+## Dropdown System
+
+BookWise includes a simple dropdown system for navigation menus:
+
+### Basic Usage
+
+```javascript
+// Create a dropdown
+const dropdown = new Dropdown('buttonId', 'menuId');
+
+// For mobile menus with custom animations
+const mobileDropdown = DropdownUtils.createCustomDropdown(
+    'menuBtn', 
+    'mobileNav',
+    ['opacity-100', 'visible', 'max-h-96'],
+    ['opacity-0', 'invisible', 'max-h-0']
+);
+```
+
+### Files
+
+- `public/classes/Dropdown.js` - Main dropdown class
+- `public/classes/DropdownUtils.js` - Helper utilities
+- `public/javascripts/dropdown-manager.js` - Manages all dropdowns
 
 ---
 

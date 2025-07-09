@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Barlow:wght@400;700&family=Inter:wght@400;700&family=Lato:wght@400;700&family=Marhey:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@400;700&family=Nunito:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;700&family=Quicksand:wght@400;700&family=Raleway:wght@400;700&family=Roboto:wght@400;700&family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet"> 
       
   </head>
-  <body class="bg-[#f7f7f7] text-[#222] font-inter min-h-screen flex flex-col">
+  <body class="bg-[#eff6ff] text-[#222] font-inter min-h-screen flex flex-col">
       <!-- Page Content -->
       <main class="flex-1 overflow-y-auto font-inter">
 
@@ -24,9 +24,16 @@
     <script>
       window.showLoginModal = {{#if showLoginModal}}true{{else}}false{{/if}};
     </script>
+  
+  <!-- Load dropdown system first -->
+  <script src="/classes/Dropdown.js"></script>
+  <script src="/classes/DropdownUtils.js"></script>
+  <script src="/javascripts/dropdown-manager.js"></script>
+  
+  <!-- Other scripts -->
   <script type="module" src="/javascripts/modals.js"></script>
-  <script src="/javascripts/mobile-nav.js"></script>
   <script type="module" src="/javascripts/auth-toggle.js"></script>
+  <script type="module" src="/javascripts/edit-profile-toggle.js"></script>
 
 
   {{!-- If the server says showAuthModal is true, this script will open the auth modal automatically

@@ -7,14 +7,14 @@ const requireAuth = require('../middleware/auth');
 router.use(requireAuth);
 
 // GET /categories - Render categories page
-router.get('/', async (req, res) => {
+router.get('/',  async (req, res) => {
   try {
     const categories = await require('../models').Category.findAll({
       where: { userId: req.session.user.id },
       order: [['name', 'ASC']]
     });
     res.render('categories', { 
-      title: 'Manage Categories',
+      title: 'BookWise',
       categories: categories
     });
   } catch (error) {
