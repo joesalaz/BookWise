@@ -291,9 +291,8 @@ This project is open source under the [MIT License](./LICENSE).
 
 **Key changes:**
 
-- Added “Session expiration handling” to the Features list.
+- Added "Session expiration handling" to the Features list.
 - Updated the Email Verification section to reflect the new redirect/modal flow.
-- Added a new “Session Expiration & Logout” section.
+- Added a new "Session Expiration & Logout" section.
 - Updated the Progress checklist.
-- Added “Session Expiration & Modal Flow” to the Wiki documentation list. 
- 
+- Added "Session Expiration & Modal Flow" to the Wiki documentation list.
