@@ -1,5 +1,7 @@
 // Import the User model
 const { User } = require("../models");
+// Import Sequelize operators
+const { Op } = require("sequelize");
 // Import bcrypt for password hashing
 const bcrypt = require("bcrypt");
 // Import crypto for token generation
@@ -203,32 +205,32 @@ exports.resendVerificationEmail = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    
-    // Debug logging
-    console.log("Login attempt for email:", email);
+    const { emailOrUsername, password } = req.body;
 
     // Validate input
-    if (!email || !password) {
-      console.log("Missing email or password");
+    if (!emailOrUsername || !password) {
       return res.render("landing", {
         title: "BookWise",
-        loginError: "Email and password are required.",
+        loginError: "Email/Username and password are required.",
         showAuthModal: true,
         defaultMode: "login"
       });
     }
 
-    // Find user by email
-    const user = await User.findOne({ where: { email } });
-    console.log("User found:", !!user);
-    console.log("User verified:", user?.isVerified);
+    // Find user by email OR username
+    const user = await User.findOne({ 
+      where: {
+        [Op.or]: [
+          { email: emailOrUsername },
+          { username: emailOrUsername }
+        ]
+      }
+    });
     
     if (!user) {
-      console.log("No user found with email:", email);
       return res.render("landing", {
         title: "BookWise",
-        loginError: "Invalid email or password.",
+        loginError: "Invalid email/username or password.",
         showAuthModal: true,
         defaultMode: "login"
       });
@@ -236,7 +238,6 @@ exports.login = async (req, res) => {
 
     // Check if user is verified
     if (!user.isVerified) {
-      console.log("User not verified");
       return res.render("landing", {
         title: "BookWise",
         loginError: "Please verify your email before logging in.",
@@ -246,15 +247,12 @@ exports.login = async (req, res) => {
     }
 
     // Compare password
-    console.log("Comparing passwords...");
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log("Password match:", isMatch);
     
     if (!isMatch) {
-      console.log("Password comparison failed");
       return res.render("landing", {
         title: "BookWise",
-        loginError: "Invalid email or password.",
+        loginError: "Invalid email/username or password.",
         showAuthModal: true,
         defaultMode: "login" // Ensure modal opens in login mode
       });

@@ -1,6 +1,20 @@
 # BookWise
 
-BookWise is a modern personal library management app that lets users organize, review, and explore their book collection with ease.
+BookWise is a modern personal library management app that lets users organize, review- Users can log out at any time via the logout route, which destroys the session and redirects to the landing page.
+
+---
+
+## Quick Startir book col---
+
+**Recent Updates:**
+
+- ✅ **Email Verification System**: Complete signup flow with token generation, SMTP integration, and verification page
+- ✅ **Flexible Login**: Users can now log in with either username or email address  
+- ✅ **Session Management**: Sliding expiration with automatic session expired modal flow
+- ✅ **Modern Navigation**: Refactored to dropdown-based navigation system for better UX
+- ✅ **Profile Management**: User profile page with edit functionality and avatar support
+
+---
 
 **Tech Stack:** Node.js, Express, Handlebars, Sequelize, SQLite, Tailwind CSS v3
 
@@ -8,7 +22,7 @@ BookWise is a modern personal library management app that lets users organize, r
 
 ## Features
 
-- Card- Added "Session Expiration & Modal Flow" to the Wiki documentation list.based dashboard for books and categories
+- Card-based dashboard for books and categories
 - Database models and associations for users, books, and categories
 - Seeders for demo users, books, and categories
 - Modern, scalable backend structure
@@ -46,42 +60,6 @@ const mobileDropdown = DropdownUtils.createCustomDropdown(
 - `public/classes/Dropdown.js` - Main dropdown class
 - `public/classes/DropdownUtils.js` - Helper utilities
 - `public/javascripts/dropdown-manager.js` - Manages all dropdowns
-
----
-
-## Migration Safety Scripts
-
-BookWise includes smart migration scripts to prevent data loss during deployment:
-
-### Available Migration Commands
-
-```bash
-# Basic Sequelize commands
-npm run migrate               # Run all pending migrations (default)
-npm run migrate:status        # Check migration status
-
-# Safe migration commands
-npm run migrate:safe          # Check status then run migrations
-npm run migrate:smart         # Smart migration with pending check
-npm run migrate:advanced      # Advanced migration with backup support
-```
-
-### Migration Scripts
-
-- **`smart-migrate.js`** - Checks for pending migrations before running
-- **`advanced-migrate.js`** - Comprehensive safety with backup support  
-- **`migrate-safely.sh`** - Shell script wrapper for safe migrations
-
-### Production Safety
-
-These scripts prevent accidental data loss by:
-
-- Only running pending migrations (not all migrations)
-- Providing detailed logging of what's being executed
-- Offering backup support (advanced script)
-- Avoiding re-running already applied migrations
-
-**Recommended for production deployments:** Use `npm run migrate:smart` instead of `npm run migrate` to ensure safe database updates.
 
 ---
 

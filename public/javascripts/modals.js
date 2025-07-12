@@ -27,12 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
     demoBtn.addEventListener("click", function (e) {
       e.preventDefault();
       window.openAuthModal("login");
-      // Wait a tick to ensure modal and form are visible
+      // Wait to ensure modal and form are visible
       setTimeout(() => {
         const usernameInput = document.getElementById("login-email");
         const passwordInput = document.getElementById("login-password");
         if (usernameInput && passwordInput) {
-          usernameInput.value = "demo@bookwise.com";
+          usernameInput.value = "demouser";
           passwordInput.value = "demo-password";
         }
       }, 100);
