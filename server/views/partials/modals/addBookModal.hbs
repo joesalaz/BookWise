@@ -1,0 +1,110 @@
+{{!-- Add Book Modal --}}
+<div id="addBookModal" 
+     class="fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-40 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl mx-auto mt-4 sm:mt-20 p-4 sm:p-8 relative h-[calc(100vh-2rem)] sm:h-auto overflow-y-auto">
+        {{!-- Header --}}
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Add New Book</h3>
+            <button id="closeAddBookModal" class="modal-close text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+        </div>
+
+        {{!-- Form --}}
+        <form id="addBookForm" class="space-y-6">
+            {{!-- Title --}}
+            <div>
+                <label for="bookTitle" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Book Title
+                </label>
+                <input type="text" 
+                       id="bookTitle" 
+                       name="title" 
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                       required>
+            </div>
+
+            {{!-- Author --}}
+            <div>
+                <label for="bookAuthor" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Author
+                </label>
+                <input type="text" 
+                       id="bookAuthor" 
+                       name="author" 
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                       required>
+            </div>
+
+            {{!-- Category --}}
+            <div>
+                <label for="bookCategory" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Category
+                </label>
+                <div class="relative">
+                    <select id="bookCategory" 
+                            name="categoryId" 
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" 
+                            required>
+                        <option value="">Select a category</option>
+                        {{!-- Categories will be loaded dynamically --}}
+                    </select>
+                    <div id="categoryMessage" class="text-sm mt-1"></div>
+                    <button type="button" 
+                            id="openAddCategoryModal"
+                            class="absolute right-0 top-0 h-full px-4 text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                        + New
+                    </button>
+                </div>
+            </div>
+
+            {{!-- Year --}}
+            <div>
+                <label for="bookYear" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Publication Year
+                </label>
+                <input type="number" 
+                       id="bookYear" 
+                       name="year" 
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       min="1000"
+                       max="{{currentYear}}"
+                       placeholder="YYYY">
+            </div>
+
+            {{!-- eBook URL --}}
+            <div>
+                <label for="bookUrl" class="block text-sm font-semibold text-gray-700 mb-2">
+                    eBook URL (optional)
+                </label>
+                <input type="url" 
+                       id="bookUrl" 
+                       name="ebookUrl" 
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                       placeholder="https://">
+            </div>
+
+            {{!-- File Upload --}}
+            <div>
+                <label for="bookFile" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Upload Book File (PDF or EPUB)
+                </label>
+                <input type="file" 
+                       id="bookFile" 
+                       name="bookFile" 
+                       accept=".pdf,.epub"
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+            </div>
+
+            {{!-- Buttons --}}
+            <div class="flex gap-4 mt-6">
+                <button type="button" 
+                        class="modal-close flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">
+                    Cancel
+                </button>
+                <button type="submit" 
+                        class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    Add Book
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

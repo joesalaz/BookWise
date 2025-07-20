@@ -3,3 +3,6 @@ books.sqlite
 127.0.0.1
 .env
 personal.md
+duplicate-checklist.md
+scripts/
+backups/

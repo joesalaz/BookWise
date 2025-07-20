@@ -14,10 +14,14 @@ const bookRouter = require("./routes/book");
 const booksRouter = require("./routes/books");
 const categoriesRouter = require("./routes/categories");
 const profileRouter = require("./routes/profile");
+const notificationsRouter = require("./routes/notifications"); // Import the notifications router
+const readingGoalsRouter = require("./routes/reading-goals");
 const authRouter = require("./routes/auth"); // Import the auth router
 const hbs = require("hbs");
 const fs = require("fs");
 
+// Load Handlebars helpers
+require('./helpers/mathHelpers');
 
 // This function will walk through the given directory (and all its subfolders)
 // and register every .hbs file it finds as a Handlebars partial.
@@ -43,7 +47,7 @@ function registerPartialsRecursively(dir, partialsRoot = dir) {
     }
   });
 }
-// Just call this once, pointing to your partials folder.
+// Just call this once, pointing to the partials folder.
 // Now I can use partials from any subfolder, like {{> structure/footer-dashboard}}
 registerPartialsRecursively(path.join(__dirname, "views/partials"));
 
@@ -56,23 +60,26 @@ var app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 app.set("view options", { layout: "layouts/layout" });
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
-app.use(sessionMiddleware); // Use the session middleware
+// Use the session middleware
+app.use(sessionMiddleware); 
 
 // Middleware to protect routes by checking if the user is authenticated
 // If the user is logged in (req.session.user exists), allow access to the route.
-const protectedRoutes = [ // Add your protected routes here
+const protectedRoutes = [
   { path: "/dashboard", router: dashboardRouter },
   { path: "/book", router: bookRouter },
   { path: "/books", router: booksRouter },
   { path: "/categories", router: categoriesRouter },
   { path: "/profile", router: profileRouter },
+  { path: "/notifications", router: notificationsRouter },
+  { path: "/reading-goals", router: readingGoalsRouter },
 ];
 
 protectedRoutes.forEach(({ path, router }) => {

@@ -1,1 +1,92 @@
-<h1>{{title}}</h1>
+{{!-- Header --}}
+{{> structure/header-dashboard}}
+
+<main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h1 class="text-3xl font-bold text-blue-900 mb-2">{{book.title}}</h1>
+                    <p class="text-lg text-blue-700">by {{book.author}}</p>
+                    {{#if book.year}}<p class="text-gray-600">Published: {{book.year}}</p>{{/if}}
+                </div>
+                
+                <!-- Book Completion Toggle Button -->
+                <button 
+                    id="toggleCompletion" 
+                    data-book-id="{{book.id}}"
+                    class="px-4 py-2 rounded-lg {{#if book.isCompleted}}bg-green-100 text-green-700 hover:bg-green-200{{else}}bg-blue-100 text-blue-700 hover:bg-blue-200{{/if}} transition-colors">
+                    {{#if book.isCompleted}}
+                        <span class="flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Completed
+                        </span>
+                    {{else}}
+                        Mark as Complete
+                    {{/if}}
+                </button>
+            </div>
+
+            {{#if book.isCompleted}}
+            <div class="mb-6 bg-green-50 text-green-700 px-4 py-3 rounded-lg">
+                Completed on {{formatDate book.completedAt}}
+            </div>
+            {{/if}}
+
+            <!-- Book details continue here -->
+        </div>
+    </div>
+</main>
+
+{{!-- Footer --}}
+{{> structure/footer-dashboard}}
+
+<script>
+document.getElementById('toggleCompletion').addEventListener('click', async function(e) {
+    const button = e.currentTarget;
+    const bookId = button.dataset.bookId;
+    
+    try {
+        const response = await fetch(`/book/${bookId}/toggle-completion`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Update button appearance
+            if (data.isCompleted) {
+                button.classList.remove('bg-blue-100', 'text-blue-700', 'hover:bg-blue-200');
+                button.classList.add('bg-green-100', 'text-green-700', 'hover:bg-green-200');
+                button.innerHTML = `
+                    <span class="flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Completed
+                    </span>
+                `;
+            } else {
+                button.classList.remove('bg-green-100', 'text-green-700', 'hover:bg-green-200');
+                button.classList.add('bg-blue-100', 'text-blue-700', 'hover:bg-blue-200');
+                button.textContent = 'Mark as Complete';
+            }
+
+            // Reload page to reflect changes
+            location.reload();
+
+            // Show achievement notification if goal is reached
+            if (data.goalAchieved) {
+                alert('Congratulations! You've reached your reading goal! 🎉');
+            }
+        }
+    } catch (error) {
+        console.error('Error toggling book completion:', error);
+        alert('Failed to update book completion status');
+    }
+});</script>

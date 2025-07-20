@@ -18,7 +18,16 @@ module.exports = (sequelize, DataTypes) => {
   Book.init({
     title: DataTypes.STRING,
     author: DataTypes.STRING,
-    year: DataTypes.INTEGER
+    year: DataTypes.INTEGER,
+    isCompleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    completedAt: {
+      type: DataTypes.DATE,
+      allowNull: true
+    }
   }, {
     sequelize,
     modelName: 'Book',

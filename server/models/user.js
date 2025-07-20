@@ -8,7 +8,23 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Book, { foreignKey: 'userId' });
       User.hasMany(models.Category, { foreignKey: 'userId' });
     }
+
+    // Update user's reading goal
+    async setReadingGoal(goal) {
+      this.readingGoal = goal;
+      await this.save();
+    }
+
+    // Increment books completed and check if goal is achieved
+    async incrementBooksCompleted() {
+      this.booksCompleted += 1;
+      await this.save();
+
+      // Return true if goal is achieved exactly
+      return this.readingGoal && this.booksCompleted === this.readingGoal;
+    }
   }
+
   User.init(
     {
       email: {
@@ -45,6 +61,15 @@ module.exports = (sequelize, DataTypes) => {
       isVerified: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+      },
+      readingGoal: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+      },
+      booksCompleted: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
       }
     },
     {

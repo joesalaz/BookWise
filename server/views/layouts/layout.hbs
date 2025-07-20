@@ -10,6 +10,15 @@
 
     <link rel="stylesheet" href="/stylesheets/output.css"/>   
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Barlow:wght@400;700&family=Inter:wght@400;700&family=Lato:wght@400;700&family=Marhey:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@400;700&family=Nunito:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;700&family=Quicksand:wght@400;700&family=Raleway:wght@400;700&family=Roboto:wght@400;700&family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet"> 
+
+    <!-- Classes -->
+    <script src="/classes/ModalManager.js" type="module"></script>
+    <script src="/classes/Toggle.js" type="module"></script>
+    
+    
+    <!-- Page-specific scripts -->
+    <script src="/javascripts/auth-toggle.js" type="module"></script>
+    <script src="/javascripts/modals.js" type="module"></script>
       
   </head>
   <body class="bg-[#eff6ff] text-[#222] font-inter min-h-screen flex flex-col">
@@ -34,7 +43,6 @@
   <script type="module" src="/javascripts/modals.js"></script>
   <script type="module" src="/javascripts/auth-toggle.js"></script>
   <script type="module" src="/javascripts/edit-profile-toggle.js"></script>
-
 
   {{!-- If the server says showAuthModal is true, this script will open the auth modal automatically
   when the page loads. It's so users see error messages (like signup/login errors) right away.

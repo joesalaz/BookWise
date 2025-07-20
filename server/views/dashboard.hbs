@@ -12,7 +12,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 8.25h12M6 12h12M6 15.75h12" />
                 </svg>
                 <h2 class="text-lg font-semibold mb-2">My Library</h2>
-                <p class="text-blue-900 mb-4">You have <span class="font-bold text-blue-700">42</span> books in your
+                <p class="text-blue-900 mb-4">You have <span class="font-bold text-blue-700 book-count">0</span> books in your
                     collection.</p>
                 <a href="/library" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">View
                     Library</a>
@@ -43,35 +43,45 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 20c0-4 4-7 8-7s8 3 8 7" />
                 </svg>
                 <h2 class="text-lg font-semibold mb-2">Profile</h2>
-                <p class="text-blue-900 mb-4">Welcome, <span class="font-bold text-blue-700">Alex</span>!</p>
+                <p class="text-blue-900 mb-4">Welcome, <span class="font-bold text-blue-700 user-name">User</span>!</p>
                 <a href="/profile" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">Edit
                     Profile</a>
             </div>
 
             <!-- Add a New Book Card -->
-            <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+            <div class="bg-white rounded-lg shadow p-6 h-[24rem] flex flex-col items-center">
                 <svg class="w-10 h-10 text-blue-700 mb-4" fill="none" stroke="currentColor" stroke-width="1.5"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
-                <h2 class="text-lg font-semibold mb-2">Add a New Book</h2>
-                <form class="w-full flex flex-col items-center">
-                    <input type="text" placeholder="Title"
-                        class="w-full mb-3 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-700" />
-                    <input type="text" placeholder="Author"
-                        class="w-full mb-3 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-700" />
-                    <input type="text" placeholder="eBook URL"
-                        class="w-full mb-3 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-700" />
-                    <input type="file" accept=".pdf,.epub" class="w-full mb-3" />
-                    <button type="submit"
-                        class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition w-full">Add
-                        Book</button>
-                </form>
+                <h2 class="text-lg font-semibold mb-4">Add a New Book</h2>
+                <button type="button"
+                        id="openAddBookModal"
+                        class="bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition w-full flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Add Book
+                </button>
             </div>
         </div>
        
     </main>
 
+    {{!-- Add Book Modal --}}
+    {{> modals/addBookModal currentYear=2025}}
+
+    {{!-- Add Category Modal (Used by Add Book Modal) --}}
+    {{> modals/addCategoryModal}}
+
     {{!--  Footer for dashboard page --}} 
     {{> structure/footer-dashboard}}
+
+    {{!-- Load book modal script for dashboard page only --}}
+    <script type="module" src="/javascripts/book-modal.js"></script>
+    
+    {{!-- Load dashboard page script --}}
+    <script type="module" src="/javascripts/dashboard-page.js"></script>
+
+
    

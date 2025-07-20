@@ -213,26 +213,23 @@ exports.login = async (req, res) => {
         title: "BookWise",
         loginError: "Email/Username and password are required.",
         showAuthModal: true,
-        defaultMode: "login"
+        defaultMode: "login",
       });
     }
 
     // Find user by email OR username
-    const user = await User.findOne({ 
+    const user = await User.findOne({
       where: {
-        [Op.or]: [
-          { email: emailOrUsername },
-          { username: emailOrUsername }
-        ]
-      }
+        [Op.or]: [{ email: emailOrUsername }, { username: emailOrUsername }],
+      },
     });
-    
+
     if (!user) {
       return res.render("landing", {
         title: "BookWise",
         loginError: "Invalid email/username or password.",
         showAuthModal: true,
-        defaultMode: "login"
+        defaultMode: "login",
       });
     }
 
@@ -242,19 +239,19 @@ exports.login = async (req, res) => {
         title: "BookWise",
         loginError: "Please verify your email before logging in.",
         showAuthModal: true,
-        defaultMode: "login"
+        defaultMode: "login",
       });
     }
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
-    
+
     if (!isMatch) {
       return res.render("landing", {
         title: "BookWise",
         loginError: "Invalid email/username or password.",
         showAuthModal: true,
-        defaultMode: "login" // Ensure modal opens in login mode
+        defaultMode: "login", // Ensure modal opens in login mode
       });
     }
 
@@ -263,7 +260,8 @@ exports.login = async (req, res) => {
       id: user.id,
       email: user.email,
       username: user.username,
-      // add any other info you want to store
+      readingGoal: user.readingGoal,
+      booksCompleted: user.booksCompleted || 0
     };
     // Redirect to dashboard or home page
     return res.redirect("/dashboard");
@@ -273,7 +271,7 @@ exports.login = async (req, res) => {
       title: "BookWise",
       loginError: "Server error during login.",
       showAuthModal: true,
-      defaultMode: "login"
+      defaultMode: "login",
     });
   }
 };
