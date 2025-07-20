@@ -103,6 +103,136 @@ class CategoryUIManager {
             setTimeout(() => this.messageElement.classList.add('hidden'), 3000);
         }
     }
+
+    // Edit category functionality
+    openEditModal(categoryId, currentName) {
+        const modal = document.getElementById('editCategoryModal');
+        const nameInput = document.getElementById('editCategoryName');
+        
+        if (modal && nameInput) {
+            nameInput.value = currentName;
+            modal.dataset.categoryId = categoryId;
+            modalManager.openModal('editCategoryModal');
+        }
+    }
+
+    async handleEditSubmit(e) {
+        e.preventDefault();
+        const modal = document.getElementById('editCategoryModal');
+        const categoryId = modal.dataset.categoryId;
+        const nameInput = document.getElementById('editCategoryName');
+        const messageEl = document.getElementById('editCategoryMessage');
+        const newName = nameInput.value.trim();
+
+        if (!newName) {
+            this.showModalMessage(messageEl, 'Please enter a category name', 'error');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/categories/api/${categoryId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: newName })
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                this.showModalMessage(messageEl, data.error || 'Update failed', 'error');
+                return;
+            }
+
+            this.showModalMessage(messageEl, 'Category updated!', 'success');
+            
+            // Update the category name in the list
+            this.updateCategoryInList(categoryId, newName);
+            
+            setTimeout(() => modalManager.closeModal('editCategoryModal'), 1500);
+        } catch (error) {
+            this.showModalMessage(messageEl, 'Something went wrong', 'error');
+        }
+    }
+
+    // Delete category functionality
+    openDeleteModal(categoryId, categoryName) {
+        const modal = document.getElementById('deleteCategoryModal');
+        const nameSpan = document.getElementById('deleteCategoryName');
+        
+        if (modal && nameSpan) {
+            nameSpan.textContent = categoryName;
+            modal.dataset.categoryId = categoryId;
+            modalManager.openModal('deleteCategoryModal');
+        }
+    }
+
+    async handleDeleteConfirm() {
+        const modal = document.getElementById('deleteCategoryModal');
+        const categoryId = modal.dataset.categoryId;
+        const messageEl = document.getElementById('deleteCategoryMessage');
+
+        try {
+            const response = await fetch(`/categories/api/${categoryId}`, {
+                method: 'DELETE'
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                this.showModalMessage(messageEl, data.error || 'Delete failed', 'error');
+                return;
+            }
+
+            this.showModalMessage(messageEl, 'Category deleted!', 'success');
+            
+            // Remove category from the list
+            this.removeCategoryFromList(categoryId);
+            
+            setTimeout(() => modalManager.closeModal('deleteCategoryModal'), 1500);
+        } catch (error) {
+            this.showModalMessage(messageEl, 'Something went wrong', 'error');
+        }
+    }
+
+    // Helper methods
+    showModalMessage(element, text, type) {
+        if (!element) return;
+        
+        element.textContent = text;
+        element.className = type === 'success' 
+            ? 'p-3 rounded bg-green-100 text-green-700' 
+            : 'p-3 rounded bg-red-100 text-red-700';
+        element.classList.remove('hidden');
+    }
+
+    updateCategoryInList(categoryId, newName) {
+        const categoryItem = document.querySelector(`[data-id="${categoryId}"]`);
+        if (categoryItem) {
+            const nameElement = categoryItem.querySelector('.category-name');
+            if (nameElement) {
+                nameElement.textContent = newName;
+            }
+        }
+    }
+
+    removeCategoryFromList(categoryId) {
+        const categoryItem = document.querySelector(`[data-id="${categoryId}"]`);
+        if (categoryItem) {
+            categoryItem.remove();
+        }
+        
+        // Show empty state if no categories left
+        const container = document.getElementById('categoriesContainer');
+        if (container && container.children.length === 0) {
+            container.innerHTML = `
+                <div class="px-6 py-12 text-center text-gray-500">
+                    <svg class="w-12 h-12 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                    </svg>
+                    <p class="text-lg">No categories yet</p>
+                    <p class="text-sm">Create your first category to start organizing your books</p>
+                </div>
+            `;
+        }
+    }
 }
 
 export default CategoryUIManager;

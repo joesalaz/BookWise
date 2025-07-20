@@ -1,13 +1,31 @@
-const { Category } = require('../models');
+const { Category, Book } = require('../models');
+const { sequelize } = require('../models');
 
 // Get all categories for user
 exports.getCategories = async (req, res) => {
   try {
     const categories = await Category.findAll({
       where: { userId: req.session.user.id },
+      include: [{
+        model: Book,
+        attributes: []
+      }],
+      attributes: {
+        include: [
+          [sequelize.fn('COUNT', sequelize.col('Books.id')), 'bookCount']
+        ]
+      },
+      group: ['Category.id'],
       order: [['name', 'ASC']]
     });
-    res.json(categories);
+    
+    // Convert bookCount from string to number
+    const formattedCategories = categories.map(cat => ({
+      ...cat.toJSON(),
+      bookCount: parseInt(cat.dataValues.bookCount) || 0
+    }));
+    
+    res.json(formattedCategories);
   } catch (error) {
     res.status(500).json({ error: 'Failed to load categories' });
   }
@@ -94,6 +112,14 @@ exports.deleteCategory = async (req, res) => {
     
     if (!category) {
       return res.status(404).json({ error: 'Category not found' });
+    }
+    
+    // Check if category has books
+    const bookCount = await Book.count({ where: { categoryId: id } });
+    if (bookCount > 0) {
+      return res.status(400).json({ 
+        error: `Can't delete category with ${bookCount} book${bookCount > 1 ? 's' : ''}. Remove books first.` 
+      });
     }
     
     await category.destroy();

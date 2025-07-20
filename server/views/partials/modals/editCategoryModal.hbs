@@ -1,0 +1,42 @@
+{{!-- Edit Category Modal --}}
+<div id="editCategoryModal" 
+     class="fixed inset-0 z-[60] items-center justify-center bg-black bg-opacity-40 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-[90%] max-w-md mx-auto mt-4 sm:mt-20 p-4 sm:p-8 relative">
+        {{!-- Header --}}
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Edit Category</h3>
+            <button id="closeEditCategoryModal" class="modal-close text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+        </div>
+
+        {{!-- Edit Form --}}
+        <form id="editCategoryForm" class="space-y-6">
+            <div>
+                <label for="editCategoryName" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Category Name
+                </label>
+                <input type="text" 
+                       id="editCategoryName" 
+                       name="name" 
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                       placeholder="Enter category name..."
+                       required>
+            </div>
+
+            {{!-- Message Area --}}
+            <div id="editCategoryMessage" class="hidden"></div>
+
+            {{!-- Buttons --}}
+            <div class="flex gap-3 pt-4">
+                <button type="button" 
+                        id="cancelEditCategory"
+                        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                    Cancel
+                </button>
+                <button type="submit" 
+                        class="flex-1 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors">
+                    Update Category
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

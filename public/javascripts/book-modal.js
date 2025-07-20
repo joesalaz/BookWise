@@ -1,6 +1,10 @@
 import CategoryUIManager from '/classes/CategoryUIManager.js';
+import BookUIManager from '/classes/BookUIManager.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Setup book form manager
+    const bookManager = new BookUIManager('addBookForm', 'addBookMessage');
+    
     // Setup category form in book modal
     const modalCategoryForm = document.getElementById('modalAddCategoryForm');
     if (modalCategoryForm) {

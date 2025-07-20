@@ -19,14 +19,15 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     author: DataTypes.STRING,
     year: DataTypes.INTEGER,
-    isCompleted: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
+    filePath: DataTypes.STRING,
+    ebookUrl: DataTypes.STRING,
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
-    completedAt: {
-      type: DataTypes.DATE,
-      allowNull: true
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,
