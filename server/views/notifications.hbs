@@ -1,0 +1,58 @@
+{{!-- Header --}}
+{{> structure/header-dashboard}}
+
+<!-- Main Content -->
+<main class="flex-1 w-full mx-auto px-4 sm:px-0 lg:px-16 py-8 md:py-16">
+    <div class="max-w-6xl mx-auto">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-feature-blue mb-2">Notifications</h1>
+            <p class="text-blue-900">Stay updated with your BookWise activity</p>
+        </div>
+
+        <!-- Notifications List -->
+        <div class="bg-white rounded-lg shadow">
+            <div class="px-6 py-4 border-b">
+                <h2 class="text-xl font-semibold flex items-center">
+                    <svg class="w-6 h-6 text-blue-700 mr-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                    </svg>
+                    All Notifications
+                </h2>
+            </div>
+            
+            <div class="divide-y divide-gray-200">
+                {{#each notifications}}
+                <div class="px-6 py-4 hover:bg-gray-50 transition-colors {{#unless isRead}}bg-blue-50{{/unless}}">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-start gap-3">
+                            {{#unless isRead}}
+                            <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                            {{/unless}}
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">{{message}}</p>
+                                <p class="text-xs text-gray-500 mt-1">{{time}}</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            {{#unless isRead}}
+                            <button class="text-blue-600 hover:text-blue-800 text-xs font-medium">Mark as read</button>
+                            {{/unless}}
+                            <button class="text-red-600 hover:text-red-800 text-xs font-medium">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            
+            {{#unless notifications}}
+            <div class="px-6 py-8 text-center text-gray-500">
+                <p>No notifications yet</p>
+            </div>
+            {{/unless}}
+        </div>
+    </div>
+</main>
+
+{{!-- Footer --}}
+{{> structure/footer-dashboard}}

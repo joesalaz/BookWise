@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const categoryController = require('../controllers/categoryController');
-const requireAuth = require('../middleware/auth');
 
-// Apply authentication middleware to all category routes
-router.use(requireAuth);
+// GET /categories/api - Get categories as JSON
+router.get('/api', categoryController.getCategories);
+
+// POST /categories/api - Create a new category
+router.post('/api', categoryController.createCategory);
 
 // GET /categories - Render categories page
 router.get('/',  async (req, res) => {
@@ -24,8 +26,6 @@ router.get('/',  async (req, res) => {
 });
 
 // API routes for AJAX operations
-router.get('/api', categoryController.getCategories);
-router.post('/api', categoryController.createCategory);
 router.put('/api/:id', categoryController.updateCategory);
 router.delete('/api/:id', categoryController.deleteCategory);
 

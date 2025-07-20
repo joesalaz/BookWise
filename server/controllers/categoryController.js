@@ -1,12 +1,15 @@
 const { Category } = require('../models');
 
-// Get all categories
+// Get all categories for user
 exports.getCategories = async (req, res) => {
   try {
-    const categories = await Category.getUserCategories(req.session.user.id);
+    const categories = await Category.findAll({
+      where: { userId: req.session.user.id },
+      order: [['name', 'ASC']]
+    });
     res.json(categories);
   } catch (error) {
-    res.status(500).json({ error: 'Could not get categories' });
+    res.status(500).json({ error: 'Failed to load categories' });
   }
 };
 
@@ -14,15 +17,42 @@ exports.getCategories = async (req, res) => {
 exports.createCategory = async (req, res) => {
   try {
     const { name } = req.body;
-    const category = await Category.addCategory(name, req.session.user.id);
+
+    if (!name || !name.trim()) {
+      return res.status(400).json({ error: 'Category name required' });
+    }
+
+    // Check if category already exists
+    const existing = await Category.findOne({
+      where: { 
+        name: name.trim(),
+        userId: req.session.user.id 
+      }
+    });
+
+    if (existing) {
+      return res.status(400).json({ error: 'Category already exists' });
+    }
+
+    // Create category
+    const category = await Category.create({
+      name: name.trim(),
+      userId: req.session.user.id
+    });
+
+    // Add notification
+    const notificationController = require('./notificationController');
+    const NotificationTypes = require('../classes/NotificationTypes');
+    
+    notificationController.createNotification(
+      req.session.user.id,
+      NotificationTypes.TYPES.CATEGORY_CREATED,
+      { categoryName: category.name }
+    ).catch(err => console.log('Notification failed'));
+
     res.status(201).json(category);
   } catch (error) {
-    // Check if it's a validation error
-    if (error.message.includes('required') || error.message.includes('exists')) {
-      res.status(400).json({ error: error.message });
-    } else {
-      res.status(500).json({ error: 'Could not create category' });
-    }
+    res.status(500).json({ error: 'Failed to create category' });
   }
 };
 
@@ -32,17 +62,24 @@ exports.updateCategory = async (req, res) => {
     const { id } = req.params;
     const { name } = req.body;
     
-    const category = await Category.updateCategory(id, name, req.session.user.id);
+    if (!name || !name.trim()) {
+      return res.status(400).json({ error: 'Name required' });
+    }
+    
+    const category = await Category.findOne({
+      where: { id, userId: req.session.user.id }
+    });
+    
+    if (!category) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+    
+    category.name = name.trim();
+    await category.save();
+    
     res.json(category);
   } catch (error) {
-    // Send appropriate error message
-    if (error.message.includes('not found')) {
-      res.status(404).json({ error: error.message });
-    } else if (error.message.includes('required') || error.message.includes('in use')) {
-      res.status(400).json({ error: error.message });
-    } else {
-      res.status(500).json({ error: 'Could not update category' });
-    }
+    res.status(500).json({ error: 'Update failed' });
   }
 };
 
@@ -50,16 +87,18 @@ exports.updateCategory = async (req, res) => {
 exports.deleteCategory = async (req, res) => {
   try {
     const { id } = req.params;
-    await Category.deleteCategory(id, req.session.user.id);
+    
+    const category = await Category.findOne({
+      where: { id, userId: req.session.user.id }
+    });
+    
+    if (!category) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+    
+    await category.destroy();
     res.json({ message: 'Category deleted' });
   } catch (error) {
-    // Send appropriate error message
-    if (error.message.includes('not found')) {
-      res.status(404).json({ error: error.message });
-    } else if (error.message.includes('Cannot delete')) {
-      res.status(400).json({ error: error.message });
-    } else {
-      res.status(500).json({ error: 'Could not delete category' });
-    }
+    res.status(500).json({ error: 'Delete failed' });
   }
 };

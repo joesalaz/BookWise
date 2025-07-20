@@ -4,9 +4,12 @@ const modalLinks = [
   { trigger: "authLink", modal: "authModal", close: "closeAuthModal" },
   { trigger: "aboutLink", modal: "aboutModal", close: "closeAboutModal" },
   { trigger: "contactLink", modal: "contactModal", close: "closeContactModal" },
+  { trigger: "setGoalButton", modal: "readingGoalModal", close: "closeReadingGoalModal" },
+  { trigger: "openAddBookModal", modal: "addBookModal", close: "closeAddBookModal" },
+  { trigger: "openAddCategoryModal", modal: "addCategoryModal", close: "closeAddCategoryModal" }
 ];
 
-const modalManager = new ModalManager(modalLinks);
+export const modalManager = new ModalManager(modalLinks);
 
 // Expose a global function for auto-opening in a specific mode
 window.openAuthModal = function (mode = "signup") {
@@ -39,3 +42,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+

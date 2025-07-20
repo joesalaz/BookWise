@@ -18,26 +18,12 @@
                 </svg>
                 Add New Category
             </h2>
-            <form id="addCategoryForm" class="flex gap-4 items-end">
-                <div class="flex-1">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Category Name</label>
-                    <input 
-                        type="text" 
-                        id="categoryName" 
-                        name="name" 
-                        placeholder="Enter category name" 
-                        class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-700"
-                        required
-                    />
-                </div>
-                <button 
-                    type="submit" 
-                    class="bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800 transition"
-                >
-                    Add Category
-                </button>
-            </form>
-            <div id="addCategoryMessage" class="mt-4 hidden"></div>
+            {{> forms/categoryForm 
+                formId="addCategoryForm"
+                formClass="flex gap-4 items-end"
+                showButtons=true
+                showCancel=false
+            }}
         </div>
 
         <!-- Categories List -->
@@ -102,59 +88,5 @@
 {{!-- Footer --}}
 {{> structure/footer-dashboard}}
 
-<!-- JavaScript for category management -->
-<script>
-// Basic category management - could be refactored into a class later
-document.addEventListener('DOMContentLoaded', function() {
-    const addForm = document.getElementById('addCategoryForm');
-    const messageDiv = document.getElementById('addCategoryMessage');
-    
-    // Add category
-    addForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(addForm);
-        const name = formData.get('name').trim();
-        
-        if (!name) {
-            showMessage('Please enter a category name', 'error');
-            return;
-        }
-        
-        try {
-            const response = await fetch('/categories/api', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name })
-            });
-            
-            const result = await response.json();
-            
-            if (response.ok) {
-                showMessage('Category added successfully!', 'success');
-                addForm.reset();
-                // TODO: Refresh categories list without page reload
-                setTimeout(() => location.reload(), 1000);
-            } else {
-                showMessage(result.error || 'Failed to add category', 'error');
-            }
-        } catch (error) {
-            console.error('Error adding category:', error);
-            showMessage('Network error. Please try again.', 'error');
-        }
-    });
-    
-    // Edit and delete handlers would go here
-    // For now, just basic functionality to get MVP working
-    
-    function showMessage(text, type) {
-        messageDiv.textContent = text;
-        messageDiv.className = `mt-4 p-3 rounded ${type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`;
-        messageDiv.classList.remove('hidden');
-        
-        setTimeout(() => {
-            messageDiv.classList.add('hidden');
-        }, 3000);
-    }
-});
-</script>
+<!-- Page-specific JavaScript -->
+<script type="module" src="/javascripts/categories-page.js"></script>
